@@ -1,0 +1,2128 @@
+<!--
+	NOTE: THIS IS NOT MY CODE!
+	This a single static page of HTML that can be used to test this program
+	without sending unnecessary requests to the real server.
+
+	All credit for this file (and the CSS file) goes to Fleet Solutions,
+	although most of the HTML has been ripped out.
+
+	Everything else was written by Finn Milner.
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+
+	<title>Special Offers</title>
+
+	<link rel="stylesheet" href="./style.css" />
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500,700,700i" rel="stylesheet" />
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<script>
+			$(document).ready(function () {
+				$(".mobile-menu-btn").on("click", function (e) {
+					e.preventDefault();
+					$(".menu-wrapper").toggleClass("show");
+					$(this).toggleClass("menu-open");
+					$("body").toggleClass("popup-active");
+				});
+				$(".menu-new > li > a, .menu-new > li > span").on(
+					"click",
+					function (e) {
+						$(this).parent().toggleClass("show");
+						$(this).parent().siblings().removeClass("show");
+					}
+				);
+				$(".header-icons-wrapper .icon-with-tooltip").on(
+					"click",
+					function () {
+						if ($(this).siblings().hasClass("active")) {
+							$(this).siblings().removeClass("active");
+							$(this)
+								.siblings()
+								.children(".icon-tooltip")
+								.removeClass("active");
+						}
+						$(this).toggleClass("active");
+						$(this)
+							.children(".icon-tooltip")
+							.toggleClass("active");
+					}
+				);
+			});
+		</script>
+		<header class="main-header-new not-logged-in">
+			<a href="#content-of-page" class="skip-to-main-content">Skip to main content</a>
+			<div class="main-header-new-wrapper">
+				<div class="mobile-menu-btn-wrapper">
+					<a href="#" class="mobile-menu-btn" title="Navigation">
+						<span class="menu-bars">
+							<span></span>
+							<span></span>
+							<span></span>
+						</span>
+					</a>
+				</div>
+				<div class="menu-wrapper">
+					<ul class="menu-new">
+						<li>
+							<span class="tr_get-a-quote notranslate" tabindex="0">Get a Quote</span>
+							<div class="submenu-full-wrapper">
+								<div class="submenu-full-container">
+									<div class="submenu-wrapper">
+										<div class="grid-cols-menu-options">
+											<div class="grid-col-4-cols">
+												<a href="/get-a-quote/">
+													<div class="menu-box-img">
+														<img alt="I know what I want"
+															src="/public/images/menu-boxes/menu-box-1.jpg" />
+														<div class="menu-box-overlay">
+															<h3 class="tr_i-know-what-i-want notranslate">
+																I Know What
+																I Want
+															</h3>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="grid-col-4-cols">
+												<a href="/special-offers/">
+													<div class="menu-box-img">
+														<img alt="Special Offers"
+															src="/public/images/menu-boxes/menu-box-2.jpg" />
+														<div class="menu-box-overlay">
+															<h3 class="tr_special-offers notranslate">
+																Special
+																Offers
+															</h3>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="grid-col-4-cols">
+												<a href="/stock-vehicles/">
+													<div class="menu-box-img">
+														<img alt="In stock vehicles"
+															src="/public/images/menu-boxes/menu-box-3.jpg" />
+														<div class="menu-box-overlay">
+															<h3 class="tr_used-stock-vehicles notranslate">
+																Used Stock
+																Vehicles
+															</h3>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="grid-col-4-cols">
+												<a href="/help-me-choose/">
+													<div class="menu-box-img">
+														<img alt="Help me choose"
+															src="/public/images/menu-boxes/menu-box-4.jpg" />
+														<div class="menu-box-overlay">
+															<h3 class="tr_help-me-choose notranslate">
+																Help Me
+																Choose
+															</h3>
+														</div>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="submenu-basic-top-level">
+							<span class="tr_help-and-contact notranslate" tabindex="0">Help & Contact</span>
+							<ul class="submenu-basic">
+								<li>
+									<a href="/faqs/"><span class="tr_faqs notranslate">FAQs / Contact</span></a>
+								</li>
+								<li>
+									<a href="/telephone/"><span class="tr_telephone notranslate">Telephone</span></a>
+								</li>
+							</ul>
+						</li>
+						<li class="submenu-basic-top-level">
+							<a class="tr_my-account notranslate" href="/my-account/">My Account</a>
+						</li>
+						<li>
+							<a class="tr_about-us notranslate" href="/about-us/">About Us</a>
+						</li>
+					</ul>
+				</div>
+				<div class="logo-wrapper">
+					<a href="/" title="Home page">
+						<img alt="Fleet Solutions logo" src="/public/images/fleet-logo-live.png" class="logo" />
+					</a>
+				</div>
+				<div class="main-header-right">
+					<div id="header-icons-wrapper" class="header-icons-wrapper">
+						<span class="icon-with-tooltip">
+							<div class="goog-te" id="google_translate_element" title="Language"></div>
+						</span>
+						<span tabindex="0" class="icon-with-tooltip notranslate">
+							<i class="material-icons">&#xE0CD;</i>
+							<div class="icon-tooltip">
+								<a href="tel:0344 811 8228">0344 811 8228</a>
+							</div>
+						</span>
+						<a href="/login/" class="header-icon-link header-icon-mobile header-icon-login" title="Login">
+							<i class="fa fa-sign-in" aria-hidden="true"></i>
+						</a>
+					</div>
+					<div class="login-wrapper">
+						<a href="/login/" data-id="2" class="button primary-button" title="Login">
+							<span class="tr_login-register notranslate">Login / Register</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<section id="content-of-page" class="page-title-section">
+			<img alt="" src="/public/images/overlay-shape.svg" class="overlay-shape" />
+			<img alt="" src="/public/images/overlay-shape-2.svg" class="overlay-shape-2" />
+			<div class="row">
+				<div class="page-title-wrapper">
+					<h1 class="tr_special-offers notranslate">
+						Special Offers
+					</h1>
+				</div>
+			</div>
+		</section>
+		<section class="default-content-section">
+			<div class="offer-button-container">
+				<button class="button secondary-button-selected fuel-type-button electric" id="electric">
+					Electric
+				</button>
+				<button class="button secondary-button fuel-type-button hybrid" id="hybrid">
+					Hybrid
+				</button>
+				<button class="button secondary-button fuel-type-button petrol-diesel" id="combustion">
+					Petrol/Diesel
+				</button>
+			</div>
+
+			<div class="offer-button-container">
+				<button class="button primary-solid-button sort-button tr_recommended notranslate" id="recommended">
+					Recommended
+				</button>
+				<button class="button light-grey-button sort-button tr_price-high-low notranslate" id="high-low">
+					Price high to low
+				</button>
+				<button class="button light-grey-button sort-button tr_price-low-high notranslate" id="low-high">
+					Price low to high
+				</button>
+			</div>
+
+			<div class="specials-message-container" style="text-align: center">
+				<h2 class="no-vehicles-special-offers" id="no-vehicles-message">
+					<strong id="offers-type-message"></strong>
+					<br />Please check again at a later date.
+				</h2>
+			</div>
+
+			<div class="row">
+				<p class="special-offers-message tr_please-note-availability notranslate" style="display: none">
+					Please note the availability dates shown on each advert
+					are estimates based on the latest updates we have
+					received from the manufacturers and are subject to
+					change.
+				</p>
+				<p class="special-offers-message" style="display: none">
+					When logged in, vehicles not available to your
+					organisation will not be shown.
+				</p>
+				<div class="grid-cols-wrapper special-offers-cols special-offers-grid" data-scroll-watch>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="1"
+						value="489 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6068">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="AUDI Q6 E-TRON ESTATE 285kW Qtro 100kWh S Line 5dr Auto [Sound+Vision]"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=105249&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											AUDI Q6 E-TRON ESTATE 285kW Qtro
+											100kWh S Line 5dr Auto
+											[Sound+Vision]
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April - May</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="2"
+						value="435 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6078">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="AUDI Q6 E-TRON ESTATE 185kW 83kWh Sport 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=106396&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											AUDI Q6 E-TRON ESTATE 185kW
+											83kWh Sport 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April - May</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="3"
+						value="419 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6091">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="AUDI Q4 E-TRON ESTATE 210kW 45 82kWh S Line 5dr Auto [Leather]"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=103832&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											AUDI Q4 E-TRON ESTATE 210kW 45
+											82kWh S Line 5dr Auto [Leather]
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April - June</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="8"
+						value="419 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6099">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="AUDI Q4 E-TRON SPORTBACK 210kW 45 82kWh S Line 5dr Auto [Leather]"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=103859&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											AUDI Q4 E-TRON SPORTBACK 210kW
+											45 82kWh S Line 5dr Auto
+											[Leather]
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April - June</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Hybrid" id="single-special" style="display: none" data="13"
+						value="395 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6121">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="car-tag tag-primary nhs-dark-blue">
+										<span class="tag-text">Plug in Hybrid PHEV
+										</span>
+									</div>
+									<div class="grid-col-5 special-offer-image">
+										<img alt="FORD KUGA 2.5 PHEV ST-Line X 5dr CVT"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=104421&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											FORD KUGA 2.5 PHEV ST-Line X 5dr
+											CVT
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Hybrid /
+														Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="14"
+						value="515 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6131">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BMW iX3 ELECTRIC ESTATE 210kW M Sport 80kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=98888&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BMW iX3 ELECTRIC ESTATE 210kW M
+											Sport 80kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="15"
+						value="439 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5493">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BMW I4 210kW eDrive35 M Sport 70kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=102449&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BMW I4 210kW eDrive35 M Sport
+											70kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="16"
+						value="555 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5507">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BMW iX 240kW xDrive40 M Sport 76.6kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=97685&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BMW iX 240kW xDrive40 M Sport
+											76.6kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="17"
+						value="579 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5894">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BMW I4 400kW M50 83.9kWh 5dr Auto [18 Alloy]"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=105836&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BMW I4 400kW M50 83.9kWh 5dr
+											Auto [18 Alloy]
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April
+													</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="18"
+						value="499 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5501">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BMW I5 TOURING 250kW eDrive40 M Sport 84kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=105000&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BMW I5 TOURING 250kW eDrive40 M
+											Sport 84kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="19"
+						value="365 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5792">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BMW iX2 150kW eDrive20 M Sport 65kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=104342&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BMW iX2 150kW eDrive20 M Sport
+											65kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="20"
+						value="665 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5743">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BMW I7 SALOON 335kW eDrive50 Excellence 105.7kWh 4dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=103392&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BMW I7 SALOON 335kW eDrive50
+											Excellence 105.7kWh 4dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>May - June</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Hybrid" id="single-special" style="display: none" data="21"
+						value="585 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6166">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="car-tag tag-primary nhs-dark-blue">
+										<span class="tag-text">Plug in Hybrid PHEV</span>
+									</div>
+									<div class="grid-col-5 special-offer-image">
+										<img alt="LAND ROVER DISCOVERY SPORT 1.5 P270e Dynamic SE 5dr Auto [5 Seat]"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=105170&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											LAND ROVER DISCOVERY SPORT 1.5
+											P270e Dynamic SE 5dr Auto [5
+											Seat]
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Hybrid /
+														Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="22"
+						value="449 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5489">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BMW iX1 150kW eDrive20 M Sport 65kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=104045&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BMW iX1 150kW eDrive20 M Sport
+											65kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Hybrid" id="single-special" style="display: none" data="24"
+						value="469 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6045">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="car-tag tag-primary nhs-dark-blue">
+										<span class="tag-text">Plug in Hybrid PHEV</span>
+									</div>
+									<div class="grid-col-5 special-offer-image">
+										<img alt="LAND ROVER RANGE ROVER EVOQUE 1.5 P270e S 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=105223&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											LAND ROVER RANGE ROVER EVOQUE
+											1.5 P270e S 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Hybrid /
+														Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="26"
+						value="429 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5606">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BYD SEAL 390kW Excellence AWD 83kWh 4dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=103925&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BYD SEAL 390kW Excellence AWD
+											83kWh 4dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="27"
+						value="265 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5910">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="BYD DOLPHIN 150kW Comfort 60.4kWh Auto"
+											data-src="/image/?cid=103786&sid=5910&image=1"
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											BYD DOLPHIN 150kW Comfort
+											60.4kWh Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="28"
+						value="375 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5672">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="CUPRA TAVASCAN 210kW V1 77kWh 5dr Auto [Winter Pack]"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=106487&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											CUPRA TAVASCAN 210kW V1 77kWh
+											5dr Auto [Winter Pack]
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="29"
+						value="395 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5735">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="HYUNDAI IONIQ 5 ELECTRIC HATCHBACK 168kW N Line 84 kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=105818&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											HYUNDAI IONIQ 5 ELECTRIC
+											HATCHBACK 168kW N Line 84 kWh
+											5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April - May</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="30"
+						value="299 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6161">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="KIA NIRO 150kW 2 Nav 65kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=102929&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											KIA NIRO 150kW 2 Nav 65kWh 5dr
+											Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April - May</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="31"
+						value="435 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5972">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="MERCEDES-BENZ EQA EQA 250+ 140kW AMG Line Executive 70.5kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=104464&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											MERCEDES-BENZ EQA EQA 250+ 140kW
+											AMG Line Executive 70.5kWh 5dr
+											Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Hybrid" id="single-special" style="display: none" data="32"
+						value="475 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5878">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="car-tag tag-primary nhs-dark-blue">
+										<span class="tag-text">Plug in Hybrid PHEV</span>
+									</div>
+									<div class="grid-col-5 special-offer-image">
+										<img alt="MERCEDES-BENZ GLA HATCHBACK 250e AMG Line Executive 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=103445&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											MERCEDES-BENZ GLA HATCHBACK 250e
+											AMG Line Executive 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Hybrid /
+														Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="33"
+						value="549 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6018">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="MERCEDES-BENZ EQE ESTATE 350+ 215kW AMG Line Edition 96kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=106260&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											MERCEDES-BENZ EQE ESTATE 350+
+											215kW AMG Line Edition 96kWh 5dr
+											Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>May - June</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="34"
+						value="289 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5963">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="MG MOTOR UK MG4 150kW SE [Nav] EV Long Range 64kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=107092&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											MG MOTOR UK MG4 150kW SE [Nav]
+											EV Long Range 64kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April - May</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="35"
+						value="425 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5518">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="MINI COUNTRYMAN 230kW SE Exclusive ALL4 66kWh 5dr Auto"
+											data-src="/image/?cid=104076&sid=5518&image=1"
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											MINI COUNTRYMAN 230kW SE
+											Exclusive ALL4 66kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="36"
+						value="275 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5947">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="car-tag tag-primary nhs-dark-blue">
+										<span class="tag-text">Immediate delivery</span>
+									</div>
+									<div class="grid-col-5 special-offer-image">
+										<img alt="MAZDA MX-30 107kW Prime Line 35.5kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=100385&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											MAZDA MX-30 107kW Prime Line
+											35.5kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>March</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Hybrid" id="single-special" style="display: none" data="37"
+						value="495 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6147">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="car-tag tag-primary nhs-dark-blue">
+										<span class="tag-text">Plug in Hybrid PHEV</span>
+									</div>
+									<div class="grid-col-5 special-offer-image">
+										<img alt="MERCEDES-BENZ GLC ESTATE 300e 4Matic Urban Edition 5dr 9G-Tronic"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=104438&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											MERCEDES-BENZ GLC ESTATE 300e
+											4Matic Urban Edition 5dr
+											9G-Tronic
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>June</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Hybrid /
+														Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Combustion" id="single-special" style="display: none" data="38"
+						value="345 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5876">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="RENAULT CLIO 1.0 TCe 90 Evolution 5dr"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=103228&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											RENAULT CLIO 1.0 TCe 90
+											Evolution 5dr
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Petrol</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="39"
+						value="369 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5600">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="SKODA ENYAQ ESTATE 210kW 85 Edition 82kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=104178&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											SKODA ENYAQ ESTATE 210kW 85
+											Edition 82kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="40"
+						value="315 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5835">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="SKODA ELROQ ESTATE 150kW 60 Edition 63kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=106739&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											SKODA ELROQ ESTATE 150kW 60
+											Edition 63kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="41"
+						value="269 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=6109">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="VAUXHALL GRANDLAND ELECTRIC HATCHBACK 157kW GS 73kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=106468&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											VAUXHALL GRANDLAND ELECTRIC
+											HATCHBACK 157kW GS 73kWh 5dr
+											Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>24 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>June</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="42"
+						value="355 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5797">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="VOLKSWAGEN ID.4 210kW Match Pro 77kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=104690&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											VOLKSWAGEN ID.4 210kW Match Pro
+											77kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="44"
+						value="375 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5799">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="car-tag tag-primary nhs-dark-blue">
+										<span class="tag-text">Fast delivery</span>
+									</div>
+									<div class="grid-col-5 special-offer-image">
+										<img alt="VOLKSWAGEN ID.7 210kW Match Pro 77kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=104669&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											VOLKSWAGEN ID.7 210kW Match Pro
+											77kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="45"
+						value="355 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5813">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="VOLKSWAGEN ID.7 TOURER 210kW Match Pro 77kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=105491&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											VOLKSWAGEN ID.7 TOURER 210kW
+											Match Pro 77kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April - May</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="46"
+						value="359 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5814">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="VOLKSWAGEN ID.5 210kW Match Pro 77kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=104736&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											VOLKSWAGEN ID.5 210kW Match Pro
+											77kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="49"
+						value="359 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5738">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="VOLVO EX30 200kW SM Extended Range Plus 69kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=103403&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											VOLVO EX30 200kW SM Extended
+											Range Plus 69kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="51"
+						value="365 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5741">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="VOLVO EX30 315kW Twin Motor Performance Plus 69kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=103404&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											VOLVO EX30 315kW Twin Motor
+											Performance Plus 69kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>March</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="52"
+						value="465 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=5759">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="VOLVO EX40 300kW Twin Motor Plus 82kWh 5dr AWD Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=105305&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											VOLVO EX40 300kW Twin Motor Plus
+											82kWh 5dr AWD Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+					<div class="grid-col-6 fuel-type-Electric" id="single-special" style="display: none" data="54"
+						value="415 ">
+						<div class="special-offer-wrapper">
+							<a href="/vehicle-select/?sid=4997">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img alt="VOLKSWAGEN ID. BUZZ 210kW Life Pro 79kWh 5dr Auto"
+											data-src="https://cdn.imagin.studio/getImage?customer=northumbrianhs&capVehicleType=car&zoomType=relative&capId=100720&paintId=0&paintDescription=&angle="
+											class="special-offer-thumbnail-image lazy" />
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">
+											VOLKSWAGEN ID. BUZZ 210kW Life
+											Pro 79kWh 5dr Auto
+										</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content"><span
+														class="tr_lease-length notranslate">Lease Length</span>:
+													<span>36 Months</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content"><span
+														class="tr_availability notranslate">Availability</span>:
+													<span>April - May</span></span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>Electric</span></span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script>
+			//show electric offers and set display order to change based on sortOrder
+			var shownSpecials = "Electric";
+			var sortOrder = "Default";
+
+			if (shownSpecials === "Electric") {
+				$(".grid-col-6.fuel-type-Electric").fadeIn(400);
+				if ($(".grid-col-6:visible").length == 0) {
+					$("#offers-type-message").text(
+						"There are no Electric Special Offers"
+					);
+					$("#no-vehicles-message").show();
+					$(".special-offers-message").hide();
+				} else {
+					$(".special-offers-message").show();
+				}
+			}
+
+			$("#electric").click(function () {
+				$("#no-vehicles-message").hide();
+				$("#no-vehicles-message-default").hide();
+				shownSpecials = "Electric";
+				$("#electric").attr(
+					"class",
+					"button secondary-button-selected fuel-type-button"
+				);
+				$("#combustion, #hybrid").attr(
+					"class",
+					"button secondary-button fuel-type-button"
+				);
+				$("#recommended").attr(
+					"class",
+					"button primary-solid-button sort-button"
+				);
+				$("#high-low, #low-high").attr(
+					"class",
+					"button light-grey-button sort-button"
+				);
+				$(
+					".grid-col-6.fuel-type-Combustion, .grid-col-6.fuel-type-Hybrid"
+				).hide();
+				resort();
+				$(".grid-col-6.fuel-type-Electric").fadeIn(400);
+
+				if ($(".grid-col-6:visible").length == 0) {
+					$("#offers-type-message").text(
+						"There are no Electric Special Offers "
+					);
+					$("#no-vehicles-message").show();
+					$(".special-offers-message").hide();
+				} else {
+					$(".special-offers-message").show();
+				}
+			});
+
+			$("#combustion").click(function () {
+				$("#no-vehicles-message").hide();
+				$("#no-vehicles-message-default").hide();
+				shownSpecials = "Combustion";
+				$("#electric, #hybrid").attr(
+					"class",
+					"button secondary-button fuel-type-button"
+				);
+				$("#combustion").attr(
+					"class",
+					"button secondary-button-selected fuel-type-button"
+				);
+				$("#recommended").attr(
+					"class",
+					"button primary-solid-button sort-button"
+				);
+				$("#high-low, #low-high").attr(
+					"class",
+					"button light-grey-button sort-button"
+				);
+				$(
+					".grid-col-6.fuel-type-Electric, .grid-col-6.fuel-type-Hybrid"
+				).hide();
+				resort();
+				$(".grid-col-6.fuel-type-Combustion").fadeIn(400);
+
+				if ($(".grid-col-6:visible").length == 0) {
+					$("#offers-type-message").text(
+						"There are no Petrol/Diesel Special Offers "
+					);
+					$("#no-vehicles-message").show();
+					$(".special-offers-message").hide();
+				} else {
+					$(".special-offers-message").show();
+				}
+			});
+
+			$("#hybrid").click(function () {
+				$("#no-vehicles-message").hide();
+				$("#no-vehicles-message-default").hide();
+				shownSpecials = "Hybrid";
+				$("#electric, #combustion").attr(
+					"class",
+					"button secondary-button fuel-type-button"
+				);
+				$("#hybrid").attr(
+					"class",
+					"button secondary-button-selected fuel-type-button"
+				);
+				$("#recommended").attr(
+					"class",
+					"button primary-solid-button sort-button"
+				);
+				$("#high-low, #low-high").attr(
+					"class",
+					"button light-grey-button sort-button"
+				);
+				$(
+					".grid-col-6.fuel-type-Combustion, .grid-col-6.fuel-type-Electric"
+				).hide();
+				resort();
+				$(".grid-col-6.fuel-type-Hybrid").fadeIn(400);
+
+				if ($(".grid-col-6:visible").length == 0) {
+					$("#offers-type-message").text(
+						"There are no Hybrid Special Offers "
+					);
+					$("#no-vehicles-message").show();
+					$(".special-offers-message").hide();
+				} else {
+					$(".special-offers-message").show();
+				}
+			});
+
+			//sort function for recommended offers or default ones based on shownSpecials
+			$("#recommended").click(function () {
+				sortOrder = "Default";
+				$("#recommended").attr(
+					"class",
+					"button primary-solid-button sort-button"
+				);
+				$("#high-low, #low-high").attr(
+					"class",
+					"button light-grey-button sort-button"
+				);
+				var specials = $(".grid-col-6.fuel-type-" + shownSpecials);
+				var count = 0;
+				specials.sort(function (a, b) {
+					a = parseInt($(a).attr("data"), 10);
+					b = parseInt($(b).attr("data"), 10);
+					count += 2;
+					// compare
+					if (a > b) {
+						return 1;
+					} else if (a < b) {
+						return -1;
+					} else {
+						return 0;
+					}
+				});
+				$(specials).appendTo(
+					".grid-cols-wrapper.special-offers-cols.special-offers-grid"
+				);
+			});
+
+			//sort function for high-low offers or default ones based on shownSpecials
+			$("#high-low").click(function () {
+				sortOrder = "High";
+				$("#high-low").attr(
+					"class",
+					"button primary-solid-button sort-button"
+				);
+				$("#recommended, #low-high").attr(
+					"class",
+					"button light-grey-button sort-button"
+				);
+
+				var specials = $(".grid-col-6.fuel-type-" + shownSpecials);
+				var count = 0;
+				specials.sort(function (a, b) {
+					a = parseInt($(a).attr("value"), 10);
+					b = parseInt($(b).attr("value"), 10);
+					count += 2;
+					// compare
+					if (a < b) {
+						return 1;
+					} else if (a > b) {
+						return -1;
+					} else {
+						return 0;
+					}
+				});
+				$(specials).appendTo(
+					".grid-cols-wrapper.special-offers-cols.special-offers-grid"
+				);
+			});
+
+			//sort function for low-high offers or default ones based on shownSpecials
+			$("#low-high").click(function () {
+				sortOrder = "Low";
+				$("#low-high").attr(
+					"class",
+					"button primary-solid-button sort-button"
+				);
+				$("#high-low, #recommended").attr(
+					"class",
+					"button light-grey-button sort-button"
+				);
+				var specials = $(".grid-col-6.fuel-type-" + shownSpecials);
+				var count = 0;
+				specials.sort(function (a, b) {
+					a = parseInt($(a).attr("value"), 10);
+					b = parseInt($(b).attr("value"), 10);
+					count += 2;
+					// compare
+					if (a > b) {
+						return 1;
+					} else if (a < b) {
+						return -1;
+					} else {
+						return 0;
+					}
+				});
+				$(specials).appendTo(
+					".grid-cols-wrapper.special-offers-cols.special-offers-grid"
+				);
+			});
+
+			//execute correct sort based on sortOrder
+			function resort() {
+				switch (sortOrder) {
+					case "Default":
+						$("#recommended").click();
+						break;
+					case "Low":
+						$("#low-high").click();
+						break;
+					case "High":
+						$("#high-low").click();
+				}
+			}
+		</script>
+		<!-- END STANDARD BIT AT BOTTOM -->
+		<script>
+			$(function () {
+				$(".lazy").lazy();
+			});
+		</script>
+	</div>
+	<footer class="main-footer">
+		<div class="row row-padding-x row-no-bg">
+			<div class="grid-cols-wrapper">
+				<div class="grid-col-4 footer-col footer-left">
+					<ul>
+						<li>
+							<a class="tr_privacy-cookie-notice notranslate" href="/privacycookienotice/">Privacy &
+								Cookie Notice</a>
+						</li>
+						<li>
+							<a class="tr_use-of-cookies notranslate" href="/useofcookies/">Use of Cookies</a>
+						</li>
+						<li>
+							<a href="/accessibilitystatement/">Accessibility Statement</a>
+						</li>
+					</ul>
+				</div>
+				<div class="grid-col-4 footer-col footer-center">
+					<img alt="Fleet Solutions" src="/public/images/logo-white.svg" class="footer-logo" />
+					<p>&copy; 2012 - 2025 Fleet Solutions</p>
+				</div>
+				<div class="grid-col-4 footer-col footer-right">
+					<ul>
+						<li>
+							<span class="tr_opening-hours notranslate">Opening Hours</span>: 09:00 to 17:00, Monday to
+							Friday
+						</li>
+						<li>
+							<span class="tr_telephone notranslate">Telephone</span>:
+							<a href="tel:0344 811 8228">0344 811 8228</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+	<script src="https://cdn.datatables.net/1.13.5/js/jquery.dataTables.min.js"></script>
+</body>
+
+</html>

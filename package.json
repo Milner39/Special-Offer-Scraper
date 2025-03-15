@@ -1,0 +1,23 @@
+{
+	"type": "module",
+	"packageManager": "pnpm@10.0.0",
+	"engines": {
+		"node": ">=22.13.0",
+		"pnpm": ">=10.0.0"
+	},
+	"scripts": {
+		"start": "tsx ./",
+		"parse": "tsx ./src/parse.ts"
+	},
+	"dependencies": {
+		"dotenv": "^16.4.7",
+		"puppeteer-core": "^24.4.0",
+		"tsx": "^4.19.3",
+		"zod": "^3.24.2"
+	},
+	"pnpm": {
+		"onlyBuiltDependencies": [
+			"esbuild"
+		]
+	}
+}
