@@ -16,7 +16,7 @@ const siteURL = env.MODE === "PROD"
 	: fileURLToPath(new URL("../test-page/special-offers.html", import.meta.url))
 
 const launchOptions = {
-	headless: !(env.MODE === "TEST"),
+	headless: true,
 	channel: "chrome"
 } satisfies LaunchOptions
 
