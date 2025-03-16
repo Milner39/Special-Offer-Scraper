@@ -125,7 +125,7 @@ async function onTick() {
 	// Get differences between last tick
 	const diffs = compareOffersSets(storedOffers, newOffersSet)
 	console.info(
-		`Offers removed: ${diffs.deleted.size}\tOffers added: ${diffs.added.size}`
+		`Offers deleted: ${diffs.deleted.size}\tOffers added: ${diffs.added.size}`
 	)
 
 	// Update stored offers
