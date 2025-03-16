@@ -6,8 +6,8 @@
 		"pnpm": ">=10.0.0"
 	},
 	"scripts": {
-		"start": "deno run ./",
-		"parse": "deno run --unstable-sloppy-imports -E -R -W -N --allow-run ./src/parse"
+		"start": "deno run -A --unstable-sloppy-imports ./",
+		"parse": "deno run -A --unstable-sloppy-imports ./src/parse"
 	},
 	"dependencies": {
 		"dotenv": "^16.4.7",

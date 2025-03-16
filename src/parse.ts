@@ -3,6 +3,7 @@
 import env from "../env"
 import { fileURLToPath, URL } from "node:url"
 import puppeteer, { LaunchOptions } from "puppeteer-core"
+import type { SpecialOffer } from "../.d.ts"
 
 // #endregion Imports
 
@@ -22,7 +23,7 @@ const launchOptions = {
 
 
 // Parse site
-const parse = async () => {
+export const parse = async () => {
 	// Launch the browser and open a new blank page
 	const browser = await puppeteer.launch(launchOptions)
 
@@ -33,11 +34,11 @@ const parse = async () => {
 	// Go to special offers page
 	await page.goto(siteURL)
 
-	// Get div containing vehicle deals
+	// Get div containing offers
 	const grid = await page.$(".special-offers-cols.special-offers-grid")
 
-	// Get all special offer details
-	const items = await grid?.$$eval("#single-special", (elements,
+	// Get all offer details
+	const items: SpecialOffer[] = await grid?.$$eval("#single-special", (elements,
 		[actualSite]
 	) => {
 		// Subroutine to trim whitespace
@@ -77,7 +78,7 @@ const parse = async () => {
 					?.innerHTML
 					|| ""
 				)
-			}
+			} satisfies SpecialOffer
 		})
 	}, [actualSite] as const) || []
 
@@ -87,5 +88,3 @@ const parse = async () => {
 	// Return parsed offers
 	return items
 }
-
-console.log(await parse())

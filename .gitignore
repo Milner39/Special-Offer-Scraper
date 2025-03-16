@@ -5,6 +5,9 @@
 # Installed dependencies
 node_modules
 
+# Parsed data
+/data
+
 # Environment variables but not the `env.example` files
 .env
 .env.*
