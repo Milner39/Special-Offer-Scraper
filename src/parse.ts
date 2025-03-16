@@ -24,28 +24,34 @@ const parse = async () => {
 	const browser = await puppeteer.launch(launchOptions)
 
 	// Open page with regular sizing
-	const page = await browser.newPage()
+	const [page] = await browser.pages()
 	await page.setViewport({width: 1080, height: 1024})
 
 	// Go to special offers page
 	await page.goto(siteURL)
 
 	// Get div containing vehicle deals
-	const grid = await page.$("div.special-offers-cols.special-offers-grid")
+	const grid = await page.$(".special-offers-cols.special-offers-grid")
 
 	// Iterate through all items, parsing offer details
-	const items = await grid?.$$eval("div#single-special", elements => {
+	const items = await grid?.$$eval("#single-special", elements => {
+
+		// Trim whitespace
+		const trimWS = (str: string) => str
+			.trim()
+			.replace(/\s+/g, " ")
+
 		return elements.map(el => {
 			const c = el.querySelector(".special-offer-content")
 			return {
-				title: c?.querySelector(".car-title")?.innerHTML || "",
+				title: trimWS(c?.querySelector(".car-title")?.innerHTML || ""),
 				link: el.querySelector("a")?.href || "",
-				lease: c?.querySelector(".tr_lease-length + *")?.innerHTML || "",
-				avail: c?.querySelector(".tr_availability + *")?.innerHTML || "",
+				lease: trimWS(c?.querySelector(".tr_lease-length + *")?.innerHTML || ""),
+				avail: trimWS(c?.querySelector(".tr_availability + *")?.innerHTML || ""),
 
 				// NOTE: The developers behind this website made a spelling mistake,
 				// so at the time of writing, this is the work around... lol
-				fuel: c?.querySelector('[classs="tr_fuel-type notranslate"] + *')?.innerHTML || ""
+				fuel: trimWS(c?.querySelector('[classs="tr_fuel-type notranslate"] + *')?.innerHTML || "")
 			}
 		})
 	}) || []

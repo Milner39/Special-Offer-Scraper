@@ -6,18 +6,12 @@
 		"pnpm": ">=10.0.0"
 	},
 	"scripts": {
-		"start": "tsx ./",
-		"parse": "tsx ./src/parse.ts"
+		"start": "deno run ./",
+		"parse": "deno run --unstable-sloppy-imports -E -R -W -N --allow-run ./src/parse"
 	},
 	"dependencies": {
 		"dotenv": "^16.4.7",
 		"puppeteer-core": "^24.4.0",
-		"tsx": "^4.19.3",
 		"zod": "^3.24.2"
-	},
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
 	}
 }
