@@ -1,3 +1,22 @@
+# What Does It Do?
+
+This application periodically scrapes [this](https://www.nhsfleetsolutions.co.uk/special-offers)
+site for car deals.
+
+At the time of creating this repo, there is currently no way to set up alerts 
+for car deals that I am interested in. So every 24 hours, this application uses 
+[puppeteer](https://github.com/puppeteer/puppeteer) to scrape key information 
+from the site.
+
+There is also some pretty clever code to check which offers have been deleted or 
+added to the site, preventing duplicate alerts. Hash Maps and Sets are used to 
+get very solid time complexities.
+
+Deals that are added can be:
+- [ ] Filtered
+- [ ] Sent to a recipient via email
+
+
 ## Prerequisites
 
 * You must have a version of Chrome installed.
@@ -7,14 +26,22 @@
 
 ## How To Use
 
-1. Install dependencies
-```bash
-pnpm i
-```
+1. Install dependencies.
+    ```bash
+    pnpm i
+    ```
 
 <br>
 
-2. Start
-```bash
-pnpm run start
-```
+2. Create a `.env` file in the project's root.
+    ```env
+    MODE = PROD    // Or TEST if you don't want to hit the real site
+    ```
+    You can check what other env options there are in the `env.ts` file.
+
+<br>
+
+3. Start.
+    ```bash
+    pnpm run start
+    ```

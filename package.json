@@ -7,8 +7,7 @@
 	},
 	"scripts": {
 		"drun": "deno run --config=./deno.jsonc -A --unstable-sloppy-imports",
-		"start": "pnpm run drun ./",
-		"parse": "pnpm run drun ./src/parse"
+		"start": "pnpm run drun ./"
 	},
 	"dependencies": {
 		"cron": "^4.1.0",
