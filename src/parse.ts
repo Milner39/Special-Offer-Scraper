@@ -8,17 +8,20 @@ import puppeteer, { LaunchOptions } from "puppeteer-core"
 
 
 
+const actualSite = "https://www.nhsfleetsolutions.co.uk/special-offers"
+
+const siteURL = env.MODE === "PROD"
+	? actualSite
+	: fileURLToPath(new URL("../test-page/special-offers.html", import.meta.url))
+
 const launchOptions = {
 	headless: !(env.MODE === "TEST"),
 	channel: "chrome"
 } satisfies LaunchOptions
 
-const siteURL = env.MODE === "PROD"
-	? "https://www.nhsfleetsolutions.co.uk/special-offers/"
-	: fileURLToPath(new URL("../test-page/special-offers.html", import.meta.url))
 
 
-
+// Parse site
 const parse = async () => {
 	// Launch the browser and open a new blank page
 	const browser = await puppeteer.launch(launchOptions)
@@ -33,31 +36,53 @@ const parse = async () => {
 	// Get div containing vehicle deals
 	const grid = await page.$(".special-offers-cols.special-offers-grid")
 
-	// Iterate through all items, parsing offer details
-	const items = await grid?.$$eval("#single-special", elements => {
-
-		// Trim whitespace
+	// Get all special offer details
+	const items = await grid?.$$eval("#single-special", (elements,
+		[actualSite]
+	) => {
+		// Subroutine to trim whitespace
 		const trimWS = (str: string) => str
 			.trim()
 			.replace(/\s+/g, " ")
 
+		// Parse details for every special offer element found in the DOM
 		return elements.map(el => {
-			const c = el.querySelector(".special-offer-content")
+			const content = el.querySelector(".special-offer-content")
 			return {
-				title: trimWS(c?.querySelector(".car-title")?.innerHTML || ""),
-				link: el.querySelector("a")?.href || "",
-				lease: trimWS(c?.querySelector(".tr_lease-length + *")?.innerHTML || ""),
-				avail: trimWS(c?.querySelector(".tr_availability + *")?.innerHTML || ""),
+				title: trimWS(content
+					?.querySelector(".car-title")
+					?.innerHTML 
+					|| ""
+				),
+				link: actualSite + (el
+					.querySelector("a")
+					?.getAttribute("href")
+					|| ""
+				),
+				leaseLength: trimWS(content
+					?.querySelector(".tr_lease-length + *")
+					?.innerHTML
+					|| ""
+				),
+				availability: trimWS(content
+					?.querySelector(".tr_availability + *")
+					?.innerHTML
+					|| ""
+				),
 
 				// NOTE: The developers behind this website made a spelling mistake,
 				// so at the time of writing, this is the work around... lol
-				fuel: trimWS(c?.querySelector('[classs="tr_fuel-type notranslate"] + *')?.innerHTML || "")
+				fuelType: trimWS(content
+					?.querySelector('[classs="tr_fuel-type notranslate"] + *')
+					?.innerHTML
+					|| ""
+				)
 			}
 		})
-	}) || []
+	}, [actualSite] as const) || []
 
 	// Close the browser
-	if (!(env.MODE === "TEST")) await browser.close()
+	await browser.close()
 
 	// Return parsed offers
 	return items
