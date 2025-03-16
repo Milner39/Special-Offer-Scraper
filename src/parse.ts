@@ -3,7 +3,7 @@
 import env from "../env"
 import { fileURLToPath, URL } from "node:url"
 import puppeteer, { LaunchOptions } from "puppeteer-core"
-import type { SpecialOffer } from "../.d.ts"
+import type { SpecialOffer } from "./types"
 
 // #endregion Imports
 
