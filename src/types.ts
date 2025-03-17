@@ -6,11 +6,11 @@ import { z } from "zod"
 
 
 
-export const specialOffer_schema = z.strictObject({
+export const SpecialOffer = z.strictObject({
 	title: z.string(),
 	link: z.string().url(),
 	leaseLength: z.string(),
 	availability: z.string(),
 	fuelType: z.string()
 })
-export type SpecialOffer = z.infer<typeof specialOffer_schema>
+export type SpecialOffer = z.infer<typeof SpecialOffer>

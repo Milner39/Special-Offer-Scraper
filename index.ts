@@ -102,7 +102,7 @@ const compareOffersSets = (current: OffersSet, updated: OffersSet): {
 
 
 // Create a set containing all of the offers stored in the JSON file
-let storedOffers: OffersSet = new Set(await dataF.get())
+let storedOffers: OffersSet = await dataF.get()
 console.info(`Already seen offers: ${storedOffers.size}`)
 
 
@@ -119,18 +119,17 @@ const cronTime = env.MODE === "PROD"
 // Create subroutine to run on CronJob tick
 async function onTick() {
 	// Parse updated offers
-	const newOffers = await parse()
-	const newOffersSet: OffersSet = new Set(newOffers)
+	const newOffers = new Set(await parse())
 
 	// Get differences between last tick
-	const diffs = compareOffersSets(storedOffers, newOffersSet)
+	const diffs = compareOffersSets(storedOffers, newOffers)
 	console.info(
 		`Offers deleted: ${diffs.deleted.size}\tOffers added: ${diffs.added.size}`
 	)
 
 	// Update stored offers
-	dataF.save(newOffers)
-	storedOffers = newOffersSet
+	await dataF.save(newOffers)
+	storedOffers = newOffers
 }
 
 
