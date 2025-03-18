@@ -13,7 +13,7 @@ import * as data from "../persistent-data"
 // #region Consts
 
 const launchOptions = {
-	headless: true,
+	headless: env.MODE !== "TEST",
 	channel: "chrome"
 } satisfies LaunchOptions
 
@@ -26,13 +26,23 @@ const authDataUrl = new URL(
 	`./data/auth.json`, import.meta.url
 )
 
+
+
 const pageUrl = new URL("https://www.nhsfleetsolutions.co.uk")
+const baseUrl = env.MODE === "PROD"
+	? pageUrl
+	: new URL("../../test-page", import.meta.url)
+
 const loginPage = "/login"
 const offersPage = "/special-offers"
 
-const baseUrl = env.MODE === "PROD"
-	? pageUrl
-	: new URL("../test-page", import.meta.url)
+const formatPath = (path: string) => {
+	const pathSuffix = env.MODE === "TEST"
+		? "/index.html"
+		: ""
+
+	return path + pathSuffix
+}
 
 
 
@@ -101,7 +111,7 @@ const initAuthCookies = async (page: Page): Promise<void> => {
 
 const checkLoggedIn = async (page: Page): Promise<boolean> => {
 	// Go to home page
-	await page.goto(baseUrl.href)
+	await page.goto(formatPath(baseUrl.href))
 
 	// Get the header element
 	const header = await page.$("header")
@@ -123,7 +133,7 @@ const checkLoggedIn = async (page: Page): Promise<boolean> => {
 
 const logIn = async (page: Page): Promise<string> => {
 	// Go to login page
-	await page.goto(baseUrl.href+loginPage)
+	await page.goto(formatPath(baseUrl.href+loginPage))
 
 	// Fill out login form
 	const form = await page.$("form")
@@ -158,7 +168,7 @@ const logIn = async (page: Page): Promise<string> => {
 
 const getOffers = async (page: Page): Promise<Set<SpecialOffer>> => {
 	// Go to offers page
-	await page.goto(baseUrl.href+offersPage)
+	await page.goto(formatPath(baseUrl.href+offersPage))
 
 	// Get div containing offers
 	const offersGrid = await page.$(".special-offers-cols, .special-offers-grid")
