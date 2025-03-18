@@ -138,7 +138,7 @@ const logIn = async (page: Page): Promise<string> => {
 	])
 
 	// Get cookies response header
-	const cookies = response.headers()["set-cookie"]
+	const cookies = response.headers()["set-cookie"] || ""
 
 	// Get session id from cookies
 	const match = cookies.match(/PHPSESSID=([^;]+)/)
