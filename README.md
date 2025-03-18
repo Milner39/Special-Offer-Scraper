@@ -26,22 +26,19 @@ Deals that are added can be:
 
 ## How To Use
 
-1. Install dependencies.
+1.  Install dependencies.
     ```bash
     pnpm i
     ```
 
 <br>
 
-2. Create a `.env` file in the project's root.
-    ```env
-    MODE = PROD    // Or TEST if you don't want to hit the real site
-    ```
-    You can check what other env options there are in the `env.ts` file.
+2.  Create a `.env` file in the project's root. You can check what env options 
+    there are in the `env.ts` file.
 
 <br>
 
-3. Start.
+3.  Start.
     ```bash
     pnpm run start
     ```

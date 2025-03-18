@@ -14,7 +14,7 @@ const envURL = new URL("./.env", import.meta.url)
 
 // Create schema for env vars
 const schema = z.object({
-	MODE: z.enum(["PROD", "TEST"]),
+	MODE: z.enum(["PROD", "TEST"]).default("TEST"),
 	TICK_ON_START: z.coerce.boolean().default(false),
 
 	FLT_SOL_EMAIL: z.string().email().optional(),
