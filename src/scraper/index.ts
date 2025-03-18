@@ -13,7 +13,7 @@ import * as data from "../persistent-data"
 // #region Consts
 
 const launchOptions = {
-	headless: false,
+	headless: true,
 	channel: "chrome"
 } satisfies LaunchOptions
 
