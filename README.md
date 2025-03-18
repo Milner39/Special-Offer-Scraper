@@ -1,7 +1,7 @@
 # What Does It Do?
 
-This application periodically scrapes [this](https://www.nhsfleetsolutions.co.uk/special-offers)
-site for car deals.
+This application periodically scrapes 
+[this](https://www.nhsfleetsolutions.co.uk/special-offers) site for car deals.
 
 At the time of creating this repo, there is currently no way to set up alerts 
 for car deals that I am interested in. So every 24 hours, this application uses 
@@ -15,6 +15,10 @@ get very solid time complexities.
 Deals that are added can be:
 - [ ] Filtered
 - [ ] Sent to a recipient via email
+
+You can also add your Fleet Solutions login details to a `.env` file and the 
+scraper will log into your account and only show offers available specifically 
+to your company.
 
 
 ## Prerequisites
