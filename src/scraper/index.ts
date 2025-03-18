@@ -26,13 +26,13 @@ const authDataUrl = new URL(
 	`./data/auth.json`, import.meta.url
 )
 
-const pageUrl = "https://www.nhsfleetsolutions.co.uk"
+const pageUrl = new URL("https://www.nhsfleetsolutions.co.uk")
 const loginPage = "/login"
 const offersPage = "/special-offers"
 
 const baseUrl = env.MODE === "PROD"
 	? pageUrl
-	: fileURLToPath(new URL("./test-page", import.meta.url))
+	: new URL("../test-page", import.meta.url)
 
 
 
@@ -89,32 +89,36 @@ const initAuthCookies = async (page: Page): Promise<void> => {
 	if (!getAuth.success) return
 
 	// Go to home page
-	await page.goto(baseUrl)
+	await page.goto(baseUrl.href)
 
 	// Set cookie on page
 	await page.browser().setCookie({
 		name: "PHPSESSID",
 		value: getAuth.result.PHPSESSID,
-		domain: pageUrl
+		domain: baseUrl.hostname,
+		httpOnly: true,
+		secure: true
 	})
 }
 
 
 const checkLoggedIn = async (page: Page): Promise<boolean> => {
 	// Go to home page
-	await page.goto(baseUrl)
+	await page.goto(baseUrl.href)
 
 	// Get the header element
 	const header = await page.$("header")
 	if (!header) throw new Error("Unable to find header")
 
-	/* The header element has a specific class
-		logged in ? "logged-in" : "not-logged-in"
-	*/
+	// Get classes on header
 	const classes = new Set(await header.evaluate(
 		el => Array.from(el.classList))
 	)
 
+	/* 
+		The header element has a specific class if logged in
+		logged in ? "logged-in" : "not-logged-in"
+	*/
 	// Return logged in status
 	return classes.has("logged-in")
 }
@@ -122,7 +126,7 @@ const checkLoggedIn = async (page: Page): Promise<boolean> => {
 
 const logIn = async (page: Page): Promise<string> => {
 	// Go to login page
-	await page.goto(baseUrl+loginPage)
+	await page.goto(baseUrl.href+loginPage)
 
 	// Fill out login form
 	const form = await page.$("form")
@@ -157,7 +161,7 @@ const logIn = async (page: Page): Promise<string> => {
 
 const getOffers = async (page: Page): Promise<Set<SpecialOffer>> => {
 	// Go to offers page
-	await page.goto(baseUrl+offersPage)
+	await page.goto(baseUrl.href+offersPage)
 
 	// Get div containing offers
 	const offersGrid = await page.$(".special-offers-cols, .special-offers-grid")
