@@ -3,7 +3,7 @@
 import { fileURLToPath, URL } from "node:url"
 import * as fs from "node:fs"
 import * as path from "node:path"
-import * as JSON from "../packages/json"
+import * as json from "../packages/json"
 import { z, ZodSchema } from "zod"
 
 // #endregion Imports
@@ -21,8 +21,8 @@ Promise<void> => {
 	// Ensure directory exists
 	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
 
-	// Write data to JSON file
-	await fs.promises.writeFile(fileUrl, JSON.stringify(data, 4))
+	// Write data to json file
+	await fs.promises.writeFile(fileUrl, json.stringify(data, 4))
 }
 
 // #endregion Write
@@ -49,8 +49,8 @@ Promise<{
 		error: "File does not exist"
 	}
 
-	// Read data from JSON file
-	const data = JSON.parse(await fs.promises.readFile(fileUrl, "utf-8"))
+	// Read data from json file
+	const data = json.parse(await fs.promises.readFile(fileUrl, "utf-8"))
 
 	// Validated data
 	const parsed = schema.safeParse(data)
