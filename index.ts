@@ -11,7 +11,58 @@ import { SpecialOffer } from "./src/types"
 
 
 
-// #region Offers
+// Create a set containing all of the offers stored in the JSON file
+const offersRead = await data.get(offersDataUrl, z.set(SpecialOffer))
+let storedOffers: OffersSet = offersRead.success
+	? offersRead.result
+	: new Set()
+
+console.info(`Already seen offers: ${storedOffers.size}`)
+
+
+
+// #region CronJob
+
+// Set how frequently cron job should run
+const cronTime = env.MODE === "PROD"
+	// s    m    h    D    M    Wd
+	? "0    0    0    *    *    *   " // Every day
+	: "*/5  *    *    *    *    *   " // Every 5s
+
+
+// Create subroutine to run on CronJob tick
+async function onTick() {
+	// Parse updated offers
+	const newOffers = await scrape()
+
+	// Get differences between last tick
+	const diffs = compareOffersSets(storedOffers, newOffers)
+	console.info(
+		`Offers deleted: ${diffs.deleted.size}\tOffers added: ${diffs.added.size}`
+	)
+
+	// Update stored offers
+	await data.save(offersDataUrl, newOffers)
+	storedOffers = newOffers
+}
+
+
+// Create CronJob
+const job = CronJob.from({ cronTime, onTick })
+
+
+// Do initial tick if option set
+if (env.TICK_ON_START) await onTick()
+
+// Start CronJob
+console.info("Starting cron job")
+job.start()
+
+// #endregion CronJob
+
+
+
+// #region Offers Utils
 
 type OffersSet = Set<SpecialOffer>
 type OffersMap = Map<string, SpecialOffer>
@@ -98,55 +149,4 @@ const compareOffersSets = (current: OffersSet, updated: OffersSet): {
 	// O(n+m) Time
 }
 
-// #endregion OffersMap
-
-
-
-// Create a set containing all of the offers stored in the JSON file
-const offersRead = await data.get(offersDataUrl, z.set(SpecialOffer))
-let storedOffers: OffersSet = offersRead.success
-	? offersRead.result
-	: new Set()
-
-console.info(`Already seen offers: ${storedOffers.size}`)
-
-
-
-// #region CronJob
-
-// Set how frequently cron job should run
-const cronTime = env.MODE === "PROD"
-	// s    m    h    D    M    Wd
-	? "0    0    0    *    *    *   " // Every day
-	: "*/5  *    *    *    *    *   " // Every 5s
-
-
-// Create subroutine to run on CronJob tick
-async function onTick() {
-	// Parse updated offers
-	const newOffers = await scrape()
-
-	// Get differences between last tick
-	const diffs = compareOffersSets(storedOffers, newOffers)
-	console.info(
-		`Offers deleted: ${diffs.deleted.size}\tOffers added: ${diffs.added.size}`
-	)
-
-	// Update stored offers
-	await data.save(offersDataUrl, newOffers)
-	storedOffers = newOffers
-}
-
-
-// Create CronJob
-const job = CronJob.from({ cronTime, onTick })
-
-
-// Do initial tick if option set
-if (env.TICK_ON_START) await onTick()
-
-// Start CronJob
-console.info("Starting cron job")
-job.start()
-
-// #endregion CronJob
+// #endregion Offers Utils
