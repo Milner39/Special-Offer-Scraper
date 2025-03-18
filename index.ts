@@ -24,7 +24,7 @@ const main = async () => {
 
 
 
-	// #region CronJob
+	// #region Cron Job
 
 	// Set how frequently cron job should run
 	const cronTime = env.MODE === "PROD"
@@ -63,7 +63,7 @@ const main = async () => {
 	console.info("Starting cron job")
 	job.start()
 
-	// #endregion CronJob
+	// #endregion Cron Job
 }
 
 // #endregion Main

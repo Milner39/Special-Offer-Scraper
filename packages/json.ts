@@ -119,7 +119,7 @@ const reviver =
 }
 
 
-//Checks if provided value is an allowed json type
+// Checks if provided value is  the name of an allowed json type
 const isJsonType =
 <T extends JsonType>
 (val: unknown): 
