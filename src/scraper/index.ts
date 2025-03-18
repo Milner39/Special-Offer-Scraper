@@ -88,9 +88,6 @@ const initAuthCookies = async (page: Page): Promise<void> => {
 	const getAuth = await data.get(authDataUrl, Auth)
 	if (!getAuth.success) return
 
-	// Go to home page
-	await page.goto(baseUrl.href)
-
 	// Set cookie on page
 	await page.browser().setCookie({
 		name: "PHPSESSID",
