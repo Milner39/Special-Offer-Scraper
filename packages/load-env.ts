@@ -18,11 +18,12 @@ import * as process from "node:process"
  * Return the env vars.
  */
 export const loadEnv = <
-	Schema extends ZodSchema
+	Schema extends ZodSchema,
+	Data extends z.infer<Schema>
 > (
 	envURL: URL,
 	schema: Schema
-) => {
+): Data => {
 	// Load environment variables
 	dotenv.config({ path: fileURLToPath(envURL) })
 
@@ -34,7 +35,7 @@ export const loadEnv = <
 	}
 
 	// Return parsed values
-	return result.data as z.infer<Schema>
+	return result.data
 }
 
 

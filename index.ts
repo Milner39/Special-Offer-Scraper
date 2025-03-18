@@ -1,8 +1,9 @@
 // #region Imports
 
 import env from "./env"
-import { parse } from "./src/parse"
-import * as dataF from "./src/persistent-data"
+import { scrape, offersDataUrl } from "./src/scraper"
+import * as data from "./src/persistent-data"
+import { z } from "zod"
 import { CronJob } from "cron"
 import { SpecialOffer } from "./src/types"
 
@@ -102,7 +103,11 @@ const compareOffersSets = (current: OffersSet, updated: OffersSet): {
 
 
 // Create a set containing all of the offers stored in the JSON file
-let storedOffers: OffersSet = await dataF.get()
+const offersRead = await data.get(offersDataUrl, z.set(SpecialOffer))
+let storedOffers: OffersSet = offersRead.success
+	? offersRead.result
+	: new Set()
+
 console.info(`Already seen offers: ${storedOffers.size}`)
 
 
@@ -119,7 +124,7 @@ const cronTime = env.MODE === "PROD"
 // Create subroutine to run on CronJob tick
 async function onTick() {
 	// Parse updated offers
-	const newOffers = new Set(await parse())
+	const newOffers = await scrape()
 
 	// Get differences between last tick
 	const diffs = compareOffersSets(storedOffers, newOffers)
@@ -128,13 +133,17 @@ async function onTick() {
 	)
 
 	// Update stored offers
-	await dataF.save(newOffers)
+	await data.save(offersDataUrl, newOffers)
 	storedOffers = newOffers
 }
 
 
 // Create CronJob
 const job = CronJob.from({ cronTime, onTick })
+
+
+// Do initial tick if option set
+if (env.TICK_ON_START) await onTick()
 
 // Start CronJob
 console.info("Starting cron job")

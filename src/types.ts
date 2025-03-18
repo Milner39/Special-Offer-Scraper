@@ -14,3 +14,9 @@ export const SpecialOffer = z.strictObject({
 	fuelType: z.string()
 })
 export type SpecialOffer = z.infer<typeof SpecialOffer>
+
+
+export const Auth = z.strictObject({
+	PHPSESSID: z.string()
+})
+export type Auth = z.infer<typeof Auth>

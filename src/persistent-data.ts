@@ -1,32 +1,28 @@
 // #region Imports
 
-import env from "../env"
 import { fileURLToPath, URL } from "node:url"
 import * as fs from "node:fs"
 import * as path from "node:path"
 import * as JSON from "../packages/json"
-import { SpecialOffer } from "./types"
-import { z } from "zod"
+import { z, ZodSchema } from "zod"
 
 // #endregion Imports
 
 
 
-const fileURL = new URL(`../data/${env.MODE}.json`, import.meta.url)
-
-
-
 // #region Write
 
-export const save = async (offers: Set<SpecialOffer>) => {
+export const save = 
+async (fileUrl: URL, data: unknown):
+Promise<void> => {
 	// Get directory path
-	const dir = path.dirname(fileURLToPath(fileURL))
+	const dir = path.dirname(fileURLToPath(fileUrl))
 
 	// Ensure directory exists
 	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
 
 	// Write data to JSON file
-	await fs.promises.writeFile(fileURL, JSON.stringify(offers, 4))
+	await fs.promises.writeFile(fileUrl, JSON.stringify(data, 4))
 }
 
 // #endregion Write
@@ -35,15 +31,40 @@ export const save = async (offers: Set<SpecialOffer>) => {
 
 // #region Read
 
-export const get = async (): Promise<Set<SpecialOffer>> => {
+export const get = 
+async <Schema extends ZodSchema>
+(fileUrl: URL, schema: Schema): 
+Promise<{
+	result: z.infer<Schema>,
+	success: true
+} | {
+	result: null,
+	success: false,
+	error?: unknown
+}> => {
 	// If file does not exist
-	if (!fs.existsSync(fileURL)) return new Set()
+	if (!fs.existsSync(fileUrl)) return {
+		result: null,
+		success: false,
+		error: "File does not exist"
+	}
 
 	// Read data from JSON file
-	const data = JSON.parse(await fs.promises.readFile(fileURL, "utf-8"))
+	const data = JSON.parse(await fs.promises.readFile(fileUrl, "utf-8"))
 
-	// Return validated data
-	return z.set(SpecialOffer).parse(data)
+	// Validated data
+	const parsed = schema.safeParse(data)
+	if (!parsed.success) return {
+		result: null,
+		success: false,
+		error: parsed.error
+	}
+
+	// Return data
+	return {
+		result: parsed.data,
+		success: true
+	}
 }
 
 // #endregion Read

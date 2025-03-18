@@ -1,12 +1,13 @@
 # Misc
+.vscode
 /ignore
 **!gitignore*
 
 # Installed dependencies
 node_modules
 
-# Parsed data
-/data
+# Scraped data
+**/data
 
 # Environment variables but not the `env.example` files
 .env
