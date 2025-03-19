@@ -50,6 +50,7 @@ Promise<{
 }
 
 
+// ISSUE: This is ridiculously slow for some reason
 export const verifyTransport = 
 async (transport: nodemailer.Transporter):
 Promise<{
@@ -58,20 +59,18 @@ Promise<{
 } | {
 	result: false,
 	error: unknown
-}> => {
-	return new Promise((resolve) => {
-		transport.verify((error) => {
-			if (error) resolve({
-				result: false,
-				error: error
-			})
+}> => new Promise((resolve) => {
+	transport.verify((error) => {
+		if (error) resolve({
+			result: false,
+			error: error
+		})
 
-			resolve({
-				result: true,
-				error: null
-			})
+		resolve({
+			result: true,
+			error: null
 		})
 	})
-}
+})
 
 // #endregion Subroutines

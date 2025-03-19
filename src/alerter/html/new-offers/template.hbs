@@ -1,0 +1,84 @@
+<html>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+:root {
+	font-family: "Roboto", sans-serif;
+}
+</style>
+
+
+<body>
+	<table style="width: 100%; align: center;">
+		<tr>
+			<td>
+				{{!-- Main Container --}}
+				<table style="width: 100%; align: center;">
+
+					{{!-- Heading --}}
+					<tr>
+						<td style="padding: 16px; text-align: center; font-size: 18px;">
+							<strong>There {{#if single}}is{{else}}are{{/if}} {{offers.length}} new offer{{#unless single}}s{{/unless}} for you to view!</strong>
+						</td>
+					</tr>
+
+					{{!-- Offers Section --}}
+					<tr>
+						<td>
+							<table style="width: 100%; align: center;">
+
+								{{!-- Sub Heading --}}
+								<tr>
+									<td style="padding: 16px; text-align: center; font-size: 16px;">
+										New offers based on your selected filters:
+									</td>
+								</tr>
+
+								{{!-- Offers --}}
+								<tr>
+									<td>
+										<table style="width: 100%; align: center;">
+
+										{{#each offers as |offer|}}
+											{{!-- Offer --}}
+											<tr>
+												<td style="padding: 14px;">
+													<a href="{{offer.link}}" style="text-decoration: none; color: inherit;">
+														<table style="width: 100%; align: center;">
+
+															{{!-- Title --}}
+															<tr>
+																<td style="text-align: center; font-size: 16px;">
+																	<strong>{{offer.title}}</strong>
+																</td>
+															</tr>
+
+															{{!-- Details --}}
+															<tr>
+																<td style="text-align: center; font-size: 14px;">
+																	Fuel Type: <strong>{{offer.fuelType}}</strong><br>
+																	Availability: <strong>{{offer.availability}}</strong><br>
+																	Lease Length: <strong>{{offer.leaseLength}}</strong>
+																</td>
+															</tr>
+
+														</table>
+													</a>
+												</td>
+											</tr>
+										{{/each}}
+
+										</table>
+									</td>
+								</tr>
+								
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+</body>
+
+</html>

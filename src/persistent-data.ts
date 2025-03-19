@@ -15,14 +15,22 @@ import { z, ZodSchema } from "zod"
 export const save = 
 async (fileUrl: URL, data: unknown):
 Promise<void> => {
+	// Write data to json file
+	await savePlain(fileUrl, json.stringify(data, 4))
+}
+
+
+export const savePlain =
+async (fileUrl: URL, data: string):
+Promise<void> => {
 	// Get directory path
 	const dir = path.dirname(fileURLToPath(fileUrl))
 
 	// Ensure directory exists
 	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
 
-	// Write data to json file
-	await fs.promises.writeFile(fileUrl, json.stringify(data, 4))
+	// Write data to file
+	await fs.promises.writeFile(fileUrl, data)
 }
 
 // #endregion Write
@@ -42,15 +50,12 @@ Promise<{
 	success: false,
 	error: unknown
 }> => {
-	// If file does not exist
-	if (!fs.existsSync(fileUrl)) return {
-		result: null,
-		success: false,
-		error: "File does not exist"
-	}
+	// Get plain data
+	const getPlainData = await getPlain(fileUrl)
+	if (!getPlainData.success) return getPlainData
 
-	// Read data from json file
-	const data = json.parse(await fs.promises.readFile(fileUrl, "utf-8"))
+	// Parse plain data for json
+	const data = json.parse(getPlainData.result)
 
 	// Validated data
 	const parsed = schema.safeParse(data)
@@ -63,6 +68,34 @@ Promise<{
 	// Return data
 	return {
 		result: parsed.data,
+		success: true
+	}
+}
+
+
+export const getPlain = 
+async (fileUrl: URL):
+Promise<{
+	result: string,
+	success: true
+} | {
+	result: null,
+	success: false,
+	error: unknown
+}> => {
+	// If file does not exist
+	if (!fs.existsSync(fileUrl)) return {
+		result: null,
+		success: false,
+		error: "File does not exist"
+	}
+
+	// Read data from file
+	const data = await fs.promises.readFile(fileUrl, "utf-8")
+
+	// Return data
+	return {
+		result: data,
 		success: true
 	}
 }

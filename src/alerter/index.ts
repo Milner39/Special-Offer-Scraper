@@ -3,6 +3,7 @@
 import env from "../../env"
 import { OfferSet } from "../types"
 import { createTransport } from "./mail"
+import { compileHtml as offersHtml } from "./html/new-offers"
 
 // #endregion Imports
 
@@ -43,10 +44,11 @@ export const alertToOffers = async (
 	const transport = transportCreation.result
 
 	// Send mail
-	const mailInfo = await transport.sendMail({
+	await transport.sendMail({
 		to: env.ALERTER_RECIPIENT,
 		from: env.ALERTER_EMAIL_USER,
-		subject: "New Offers - Fleet Solutions Scraper"
+		subject: "New Offers - Fleet Solutions Scraper",
+		html: await offersHtml(added)
 	})
 }
 
