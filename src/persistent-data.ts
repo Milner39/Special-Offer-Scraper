@@ -40,7 +40,7 @@ Promise<{
 } | {
 	result: null,
 	success: false,
-	error?: unknown
+	error: unknown
 }> => {
 	// If file does not exist
 	if (!fs.existsSync(fileUrl)) return {

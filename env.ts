@@ -25,9 +25,19 @@ const schema = z.object({
 	// Tick instantly before starting tick cycle.
 	TICK_ON_START: z.coerce.boolean().default(false),
 
+
 	// Fleet Solutions login details, site will filter offers to your company
 	FLT_SOL_EMAIL: z.string().email().optional(),
 	FLT_SOL_PASS: z.string().optional(),
+
+
+	/* Alerter email login details
+		emails with new offers will be sent to set recipients.
+		TODO: replace ALERTER_RECIPIENT with local json file
+	*/
+	ALERTER_EMAIL_USER: z.string().email().optional(),
+	ALERTER_EMAIL_PASS: z.string().optional(),
+	ALERTER_RECIPIENT: z.string().email().optional()
 })
 
 

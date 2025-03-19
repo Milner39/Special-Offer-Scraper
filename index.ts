@@ -2,8 +2,8 @@
 
 import env from "./env"
 import { scrape, offersDataUrl } from "./src/scraper"
+import { alertToOffers } from "./src/alerter"
 import * as data from "./src/persistent-data"
-import { z } from "zod"
 import { CronJob } from "cron"
 import { Offer, OfferSet, OfferMap } from "./src/types"
 
@@ -46,6 +46,12 @@ const main = async () => {
 		console.info(
 			`Offers deleted: ${diffs.deleted.size}\tOffers added: ${diffs.added.size}`
 		)
+
+		/* Send alerts of offer changes
+			Do not await because no information is required from the alerter,
+			and it is slow to execute.
+		*/
+		alertToOffers(diffs.deleted, diffs.added)
 
 		// Update stored offers
 		await data.save(offersDataUrl, newOffers)
