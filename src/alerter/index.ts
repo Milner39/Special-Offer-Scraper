@@ -43,11 +43,15 @@ export const alertToOffers = async (
 	// Get transport
 	const transport = transportCreation.result
 
+
+	// Format subject
+	const subject = `${added.size} New Offer${added.size === 1 ? "" : "s"} - Fleet Solutions Scraper`
+
 	// Send mail
 	await transport.sendMail({
 		to: env.ALERTER_RECIPIENT,
 		from: env.ALERTER_EMAIL_USER,
-		subject: "New Offers - Fleet Solutions Scraper",
+		subject: subject,
 		html: await offersHtml(added)
 	})
 }
