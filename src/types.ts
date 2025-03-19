@@ -6,14 +6,25 @@ import { z } from "zod"
 
 
 
-export const SpecialOffer = z.strictObject({
+// #region Offers
+
+export const Offer = z.strictObject({
 	title: z.string(),
 	link: z.string().url(),
 	leaseLength: z.string(),
 	availability: z.string(),
 	fuelType: z.string()
 })
-export type SpecialOffer = z.infer<typeof SpecialOffer>
+export type Offer = z.infer<typeof Offer>
+
+export const OfferSet = z.set(Offer)
+export type OfferSet = z.infer<typeof OfferSet>
+
+export const OfferMap = z.map(z.string(), Offer)
+export type OfferMap = z.infer<typeof OfferMap>
+
+// #endregion Offers
+
 
 
 export const Auth = z.strictObject({

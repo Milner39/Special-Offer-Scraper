@@ -3,7 +3,7 @@
 import env from "../../env"
 import { fileURLToPath, URL } from "node:url"
 import puppeteer, { LaunchOptions, Page } from "puppeteer-core"
-import { SpecialOffer, Auth } from "../types"
+import { OfferSet, Auth } from "../types"
 import * as data from "../persistent-data"
 
 // #endregion Imports
@@ -51,8 +51,8 @@ const usingLogin = (
 	env.MODE === "PROD" &&
 
 	// Login credentials set
-	Boolean(env.FLT_SOL_EMAIL) &&
-	Boolean(env.FLT_SOL_PASS)
+	typeof env.FLT_SOL_EMAIL === "string" &&
+	typeof env.FLT_SOL_PASS === "string"
 )
 
 // #endregion Consts
@@ -166,7 +166,7 @@ const logIn = async (page: Page): Promise<string> => {
 }
 
 
-const getOffers = async (page: Page): Promise<Set<SpecialOffer>> => {
+const getOffers = async (page: Page): Promise<OfferSet> => {
 	// Go to offers page
 	await page.goto(formatPath(baseUrl.href+offersPage))
 
@@ -175,7 +175,7 @@ const getOffers = async (page: Page): Promise<Set<SpecialOffer>> => {
 	if (!offersGrid) throw new Error("Unable to find offers gird")
 	
 	// Get all offers
-	const offers = new Set<SpecialOffer>(
+	const offers: OfferSet = new Set(
 		await offersGrid.$$eval(":scope > div", (els, [pageUrl]) => {
 			
 			// Trim whitespace subroutine
@@ -221,7 +221,7 @@ const getOffers = async (page: Page): Promise<Set<SpecialOffer>> => {
 	)
 
 	// Save offer info locally
-	await data.save(offersDataUrl, offers satisfies Set<SpecialOffer>)
+	await data.save(offersDataUrl, offers)
 
 	// Return all offers
 	return offers

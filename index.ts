@@ -5,7 +5,7 @@ import { scrape, offersDataUrl } from "./src/scraper"
 import * as data from "./src/persistent-data"
 import { z } from "zod"
 import { CronJob } from "cron"
-import { SpecialOffer } from "./src/types"
+import { Offer, OfferSet, OfferMap } from "./src/types"
 
 // #endregion Imports
 
@@ -15,11 +15,14 @@ import { SpecialOffer } from "./src/types"
 
 const main = async () => {
 
-	// Create a set containing all of the offers stored in the json file
-	const offersRead = await data.get(offersDataUrl, z.set(SpecialOffer))
-	let storedOffers: OffersSet = offersRead.success
-		? offersRead.result
+	// Get all offers stored in the json file
+	const validateOffers = await data.get(offersDataUrl, OfferSet)
+
+	// Create a reference to the stored offers
+	let storedOffers: OfferSet = validateOffers.success
+		? validateOffers.result
 		: new Set()
+	
 	console.info(`Already seen offers: ${storedOffers.size}`)
 
 
@@ -72,18 +75,14 @@ const main = async () => {
 
 // #region Offers Utils
 
-type OffersSet = Set<SpecialOffer>
-type OffersMap = Map<string, SpecialOffer>
-
-
 // Subroutine to generate a hash for an offer
-const hashOffer = (offer: SpecialOffer): string => JSON.stringify(
+const hashOffer = (offer: Offer): string => JSON.stringify(
 	offer, Object.keys(offer).sort()
 )
 
 
 // Merge 2 sets without forcing reference equality, removing duplicates
-const mergeOffersSets = (setA: OffersSet, setB: OffersSet): OffersSet => {
+const mergeOffersSets = (setA: OfferSet, setB: OfferSet): OfferSet => {
 	/*
 		The reason why combining sets the regular way will not work, is because
 		objects with different references are not considered equal, so we would 
@@ -91,7 +90,7 @@ const mergeOffersSets = (setA: OffersSet, setB: OffersSet): OffersSet => {
 	*/
 
 	// Initialise map to hold unique hashes and objects
-	const uniqueOffers: OffersMap = new Map()
+	const uniqueOffers: OfferMap = new Map()
 
 	// Iterate over combined sets
 	for (const offer of [...setA, ...setB]) {
@@ -108,14 +107,14 @@ const mergeOffersSets = (setA: OffersSet, setB: OffersSet): OffersSet => {
 
 
 // Return the additions and deletions between 2 sets
-const compareOffersSets = (current: OffersSet, updated: OffersSet): {
-	deleted: OffersSet,
-	added: OffersSet
+const compareOffersSets = (current: OfferSet, updated: OfferSet): {
+	deleted: OfferSet,
+	added: OfferSet
 } => {
 	
 	// Initialise maps to hold diffs
-	const deleted: OffersMap = new Map()
-	const added: OffersMap = new Map()
+	const deleted: OfferMap = new Map()
+	const added: OfferMap = new Map()
 
 	/*
 		Initialise set to hold current hashes.
