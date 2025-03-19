@@ -59,19 +59,19 @@ Promise<{
 	result: false,
 	error: unknown
 }> => {
-	// Verify transport connection
-	try {
-		await transport.verify()
-		return {
-			result: true,
-			error: null
-		} as const
-	} catch (err) {
-		return {
-			result: false,
-			error: err
-		} as const
-	}
+	return new Promise((resolve) => {
+		transport.verify((error) => {
+			if (error) resolve({
+				result: false,
+				error: error
+			})
+
+			resolve({
+				result: true,
+				error: null
+			})
+		})
+	})
 }
 
 // #endregion Subroutines
