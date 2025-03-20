@@ -10,6 +10,7 @@
 		"start": "pnpm run drun ./"
 	},
 	"dependencies": {
+		"@types/node": "^22.13.10",
 		"@types/nodemailer": "^6.4.17",
 		"cron": "^4.1.0",
 		"dotenv": "^16.4.7",
