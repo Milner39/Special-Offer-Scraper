@@ -47,7 +47,7 @@ export const alertToOffers = async (
 	// Filter offers
 	const filteredOffers = filter(added)
 	if (filteredOffers.size < 1) return
-	console.info(`Altering recipients to: ${filteredOffers.size} new offer(s)...`)
+	console.info(`Altering recipients to: ${filteredOffers.size} new offer(s)`)
 
 
 	// Get transport
@@ -77,20 +77,22 @@ export const alertToOffers = async (
 // #region Filters
 
 /** Return a set after filtering */
-const filter = (offers: OfferSet) => {
+const filter = (offers: OfferSet): OfferSet => {
 
-	// Clone the set to not modify the original
-	const offersClone = new Set(offers)
+	// Create a new set to not modify the original
+	const filtered: OfferSet = new Set()
 	
 	// Iterate over set
-	for (const offer of offersClone) {
-		if (offer.fuelType !== "Electric") {
-			offers.delete(offer)
-		}
+	for (const offer of offers) {
+		// Filters
+		if (offer.fuelType !== "Electric") continue
+
+		// Add to filtered set
+		filtered.add(offer)
 	}
 
-	// Return filtered set
-	return offersClone
+	// Return filtered offers
+	return filtered
 }
 
 // #endregion Filters
