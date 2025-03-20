@@ -2,7 +2,7 @@
 
 import env from "../../env"
 import { OfferSet } from "../types"
-import { createTransport } from "./mail"
+import { createTransport } from "./mail-transport"
 import { compileHtml as offersHtml } from "./html/new-offers"
 
 // #endregion Imports
