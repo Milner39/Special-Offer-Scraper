@@ -1,44 +1,20 @@
 // #region Imports
 
 import { URL } from "node:url"
-import handlebars from "handlebars"
-import * as data from "../../../../packages/persistent-data"
+import { compileHtml } from "../../../../packages/handlebars"
 import { OfferSet, Result } from "../../../types"
 
 // #endregion Imports
 
 
 
-const templateUrl = new URL("./template.hbs", import.meta.url)
-
-export const compileHtml = 
-async (offers: OfferSet):
-Promise<Result<string>> => {
-
-	// Get template file
-	const getTemplateSource = await data.getPlain(templateUrl)
-	if (!getTemplateSource.success) return getTemplateSource
-
-	
-	try {
-		// Compile html
-		const html = handlebars.compile(getTemplateSource.result)({
+export default async (offers: OfferSet) => {
+	// Compile template file with configured options
+	return await compileHtml({
+		templateUrl: new URL("./template.hbs", import.meta.url),
+		context: {
 			single: offers.size === 1,
 			offers: Array.from(offers)
-		})
-
-		// Return html
-		return {
-			result: html,
-			success: true
 		}
-	}
-
-	catch (err) {
-		return {
-			result: null,
-			success: false,
-			error: err
-		}
-	}
+	})
 }

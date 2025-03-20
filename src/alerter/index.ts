@@ -3,7 +3,7 @@
 import env from "../../env"
 import { OfferSet } from "../types"
 import { createTransport } from "./mail-transport"
-import { compileHtml as offersHtml } from "./html/new-offers"
+import makeOffersMail from "./html/new-offers"
 
 // #endregion Imports
 
@@ -48,7 +48,7 @@ export const alertToOffers = async (
 	const transport = transportCreation.result
 
 	// Get html
-	const htmlRes = await offersHtml(added)
+	const htmlRes = await makeOffersMail(added)
 	if (!htmlRes.success) return
 
 	// Get subject
