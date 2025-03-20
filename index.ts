@@ -3,7 +3,7 @@
 import env from "./env"
 import { scrape, offersDataUrl } from "./src/scraper"
 import { alertToOffers } from "./src/alerter"
-import * as data from "./src/persistent-data"
+import * as data from "./packages/persistent-data"
 import { CronJob } from "cron"
 import { Offer, OfferSet, OfferMap } from "./src/types"
 

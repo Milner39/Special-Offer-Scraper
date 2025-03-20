@@ -2,7 +2,7 @@
 
 import { URL } from "node:url"
 import handlebars from "handlebars"
-import * as data from "../../../persistent-data"
+import * as data from "../../../../packages/persistent-data"
 import { OfferSet, Result } from "../../../types"
 
 // #endregion Imports

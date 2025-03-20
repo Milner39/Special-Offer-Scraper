@@ -4,7 +4,7 @@ import env from "../../env"
 import { URL } from "node:url"
 import puppeteer, { LaunchOptions, Page } from "puppeteer-core"
 import { OfferSet, Auth } from "../types"
-import * as data from "../persistent-data"
+import * as data from "../../packages/persistent-data"
 
 // #endregion Imports
 
