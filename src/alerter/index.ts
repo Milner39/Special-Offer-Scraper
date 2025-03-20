@@ -41,6 +41,7 @@ export const alertToOffers = async (
 	
 	// Checks for early returns
 	if (!usingMailAlerts) return
+	if (added.size < 1) return
 	if (!transportCreation.success) return
 
 
