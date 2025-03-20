@@ -38,6 +38,7 @@ export const alertToOffers = async (
 	deleted: OfferSet = new Set(),
 	added: OfferSet = new Set()
 ) => {
+	
 	// Checks for early returns
 	if (!usingMailAlerts) return
 	if (!transportCreation.success) return

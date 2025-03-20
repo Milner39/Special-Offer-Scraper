@@ -11,6 +11,7 @@ import { Result } from "../types"
 
 // #region Subroutines
 
+/** Created and verify a Nodemailer transport */
 export const createTransport = async (): 
 Promise<Result<nodemailer.Transporter>> => {
 
@@ -41,6 +42,7 @@ Promise<Result<nodemailer.Transporter>> => {
 
 
 // ISSUE: This is ridiculously slow for some reason
+/** Verify the auth of a Nodemailer transport */
 export const verifyTransport = 
 async (transport: nodemailer.Transporter):
 Promise<Result<true>> => new Promise((resolve) => {
