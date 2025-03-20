@@ -15,6 +15,8 @@ import { Offer, OfferSet, OfferMap } from "./src/types"
 
 const main = async () => {
 
+	console.log(`Running in ${env.MODE} mode`)
+
 	// Get all offers stored locally
 	const validateOffers = await data.get(offersDataUrl, OfferSet)
 
