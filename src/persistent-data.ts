@@ -15,25 +15,48 @@ import { Result } from "./types"
 
 export const save = 
 async (fileUrl: URL, data: unknown):
-Promise<void> => {
+Promise<Result<true>> => {
 	
 	// Write data to json file
-	await savePlain(fileUrl, json.stringify(data, 4))
+	const writePlainData = await savePlain(fileUrl, json.stringify(data, 4))
+	if (!writePlainData.success) return writePlainData
+
+	// Return success
+	return {
+		result: true,
+		success: true
+	}
 }
 
 
 export const savePlain =
 async (fileUrl: URL, data: string):
-Promise<void> => {
+Promise<Result<true>> => {
 
 	// Get directory path
 	const dir = path.dirname(fileURLToPath(fileUrl))
 
-	// Ensure directory exists
-	if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+	try {
+		// Ensure directory exists
+		if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true })
+	
+		// Write data to file
+		await fs.promises.writeFile(fileUrl, data)
 
-	// Write data to file
-	await fs.promises.writeFile(fileUrl, data)
+		// Return success
+		return {
+			result: true,
+			success: true
+		}
+	}
+
+	catch (err) {
+		return {
+			result: null,
+			success: false,
+			error: err
+		}
+	}
 }
 
 // #endregion Write
@@ -47,12 +70,12 @@ async <Schema extends ZodSchema>
 (fileUrl: URL, schema: Schema): 
 Promise<Result<z.infer<Schema>>> => {
 
-	// Get plain data
-	const getPlainData = await getPlain(fileUrl)
-	if (!getPlainData.success) return getPlainData
+	// Read plain data
+	const readPlainData = await getPlain(fileUrl)
+	if (!readPlainData.success) return readPlainData
 
 	// Parse plain data for json
-	const data = json.parse(getPlainData.result)
+	const data = json.parse(readPlainData.result)
 
 	// Validated data
 	const parsed = schema.safeParse(data)
@@ -81,14 +104,25 @@ Promise<Result<string>> => {
 		error: "File does not exist"
 	}
 
-	// Read data from file
-	const data = await fs.promises.readFile(fileUrl, "utf-8")
+	try {
+		// Read data from file
+		const data = await fs.promises.readFile(fileUrl, "utf-8")
 
-	// Return data
-	return {
-		result: data,
-		success: true
+		// Return data
+		return {
+			result: data,
+			success: true
+		}
 	}
+
+	catch (err) {
+		return {
+			result: null,
+			success: false,
+			error: err
+		}
+	}
+
 }
 
 // #endregion Read
