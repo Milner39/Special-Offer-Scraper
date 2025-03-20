@@ -3,6 +3,7 @@
 import { URL } from "node:url"
 import loadEnv from "./packages/load-env"
 import { z } from "zod"
+import * as zz from "./packages/zod"
 
 // #endregion Imports
 
@@ -17,13 +18,18 @@ const schema = z.object({
 	/* What mode to run the application
 		PROD: Scraper hits the real site but ticks less frequently.
 
-		TEST: Scraper hits a test site, and ticks more frequently, but login
-		details can't be used.
+		TEST: Scraper hits a test site, and ticks more frequently, but does
+		not use: 
+			Fleet Solution login details for company filtering.
+			Email alerts.
 	*/
 	MODE: z.enum(["PROD", "TEST"]).default("TEST"),
 
 	// Tick instantly before starting tick cycle.
-	TICK_ON_START: z.coerce.boolean().default(false),
+	TICK_ON_START: zz.boolFromString.default("false"),
+
+	// Show browser when scraping
+	HEADLESS: zz.boolFromString.default("true"),
 
 
 	// Fleet Solutions login details, site will filter offers to your company

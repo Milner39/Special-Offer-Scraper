@@ -1,5 +1,5 @@
 /*
 	File needs to be here so `deno run` commands can understand how to handle
-	node_modules and any settings required that might be set in package.json
+	node_modules and any settings required that might be set in package.json.
 */
 {}

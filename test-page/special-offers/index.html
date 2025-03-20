@@ -3,7 +3,7 @@
 	This a single static page of HTML that can be used to test this program
 	without sending unnecessary requests to the real server.
 
-	All credit for this file (and the CSS file) goes to Fleet Solutions,
+	All credit for this file goes to Fleet Solutions,
 	although most of the HTML has been ripped out.
 
 	Everything else was written by Finn Milner.
@@ -16,49 +16,11 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
 
 	<title>Special Offers</title>
-
-	<link rel="stylesheet" href="../style.css" />
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,400i,500,700,700i" rel="stylesheet" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 </head>
 
 <body>
 	<div class="wrapper">
-		<script>
-			$(document).ready(function () {
-				$(".mobile-menu-btn").on("click", function (e) {
-					e.preventDefault();
-					$(".menu-wrapper").toggleClass("show");
-					$(this).toggleClass("menu-open");
-					$("body").toggleClass("popup-active");
-				});
-				$(".menu-new > li > a, .menu-new > li > span").on(
-					"click",
-					function (e) {
-						$(this).parent().toggleClass("show");
-						$(this).parent().siblings().removeClass("show");
-					}
-				);
-				$(".header-icons-wrapper .icon-with-tooltip").on(
-					"click",
-					function () {
-						if ($(this).siblings().hasClass("active")) {
-							$(this).siblings().removeClass("active");
-							$(this)
-								.siblings()
-								.children(".icon-tooltip")
-								.removeClass("active");
-						}
-						$(this).toggleClass("active");
-						$(this)
-							.children(".icon-tooltip")
-							.toggleClass("active");
-					}
-				);
-			});
-		</script>
 		<header class="main-header-new not-logged-in">
 			<a href="#content-of-page" class="skip-to-main-content">Skip to main content</a>
 			<div class="main-header-new-wrapper">
@@ -82,12 +44,9 @@
 											<div class="grid-col-4-cols">
 												<a href="/get-a-quote/">
 													<div class="menu-box-img">
-														<img alt="I know what I want"
-															src="/public/images/menu-boxes/menu-box-1.jpg" />
 														<div class="menu-box-overlay">
 															<h3 class="tr_i-know-what-i-want notranslate">
-																I Know What
-																I Want
+																I Know What I Want
 															</h3>
 														</div>
 													</div>
@@ -96,12 +55,9 @@
 											<div class="grid-col-4-cols">
 												<a href="/special-offers/">
 													<div class="menu-box-img">
-														<img alt="Special Offers"
-															src="/public/images/menu-boxes/menu-box-2.jpg" />
 														<div class="menu-box-overlay">
 															<h3 class="tr_special-offers notranslate">
-																Special
-																Offers
+																Special Offers
 															</h3>
 														</div>
 													</div>
@@ -110,12 +66,9 @@
 											<div class="grid-col-4-cols">
 												<a href="/stock-vehicles/">
 													<div class="menu-box-img">
-														<img alt="In stock vehicles"
-															src="/public/images/menu-boxes/menu-box-3.jpg" />
 														<div class="menu-box-overlay">
 															<h3 class="tr_used-stock-vehicles notranslate">
-																Used Stock
-																Vehicles
+																Used Stock Vehicles
 															</h3>
 														</div>
 													</div>
@@ -124,12 +77,9 @@
 											<div class="grid-col-4-cols">
 												<a href="/help-me-choose/">
 													<div class="menu-box-img">
-														<img alt="Help me choose"
-															src="/public/images/menu-boxes/menu-box-4.jpg" />
 														<div class="menu-box-overlay">
 															<h3 class="tr_help-me-choose notranslate">
-																Help Me
-																Choose
+																Help Me Choose
 															</h3>
 														</div>
 													</div>
@@ -160,9 +110,6 @@
 					</ul>
 				</div>
 				<div class="logo-wrapper">
-					<a href="/" title="Home page">
-						<img alt="Fleet Solutions logo" src="/public/images/fleet-logo-live.png" class="logo" />
-					</a>
 				</div>
 				<div class="main-header-right">
 					<div id="header-icons-wrapper" class="header-icons-wrapper">
@@ -189,8 +136,6 @@
 		</header>
 
 		<section id="content-of-page" class="page-title-section">
-			<img alt="" src="/public/images/overlay-shape.svg" class="overlay-shape" />
-			<img alt="" src="/public/images/overlay-shape-2.svg" class="overlay-shape-2" />
 			<div class="row">
 				<div class="page-title-wrapper">
 					<h1 class="tr_special-offers notranslate">
@@ -222,13 +167,6 @@
 				<button class="button light-grey-button sort-button tr_price-low-high notranslate" id="low-high">
 					Price low to high
 				</button>
-			</div>
-
-			<div class="specials-message-container" style="text-align: center">
-				<h2 class="no-vehicles-special-offers" id="no-vehicles-message">
-					<strong id="offers-type-message"></strong>
-					<br />Please check again at a later date.
-				</h2>
 			</div>
 
 			<div class="row">
@@ -2080,11 +2018,6 @@
 			}
 		</script>
 		<!-- END STANDARD BIT AT BOTTOM -->
-		<script>
-			$(function () {
-				$(".lazy").lazy();
-			});
-		</script>
 	</div>
 	<footer class="main-footer">
 		<div class="row row-padding-x row-no-bg">
@@ -2092,8 +2025,7 @@
 				<div class="grid-col-4 footer-col footer-left">
 					<ul>
 						<li>
-							<a class="tr_privacy-cookie-notice notranslate" href="/privacycookienotice/">Privacy &
-								Cookie Notice</a>
+							<a class="tr_privacy-cookie-notice notranslate" href="/privacycookienotice/">Privacy & Cookie Notice</a>
 						</li>
 						<li>
 							<a class="tr_use-of-cookies notranslate" href="/useofcookies/">Use of Cookies</a>
@@ -2104,18 +2036,15 @@
 					</ul>
 				</div>
 				<div class="grid-col-4 footer-col footer-center">
-					<img alt="Fleet Solutions" src="/public/images/logo-white.svg" class="footer-logo" />
 					<p>&copy; 2012 - 2025 Fleet Solutions</p>
 				</div>
 				<div class="grid-col-4 footer-col footer-right">
 					<ul>
 						<li>
-							<span class="tr_opening-hours notranslate">Opening Hours</span>: 09:00 to 17:00, Monday to
-							Friday
+							<span class="tr_opening-hours notranslate">Opening Hours</span>: 09:00 to 17:00, Monday to Friday
 						</li>
 						<li>
-							<span class="tr_telephone notranslate">Telephone</span>:
-							<a href="tel:0344 811 8228">0344 811 8228</a>
+							<span class="tr_telephone notranslate">Telephone</span>: <a href="tel:0344 811 8228">0344 811 8228</a>
 						</li>
 					</ul>
 				</div>

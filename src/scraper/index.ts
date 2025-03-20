@@ -1,7 +1,7 @@
 // #region Imports
 
 import env from "../../env"
-import { fileURLToPath, URL } from "node:url"
+import { URL } from "node:url"
 import puppeteer, { LaunchOptions, Page } from "puppeteer-core"
 import { OfferSet, Auth } from "../types"
 import * as data from "../persistent-data"
@@ -13,7 +13,7 @@ import * as data from "../persistent-data"
 // #region Consts
 
 const launchOptions = {
-	headless: env.MODE !== "TEST",
+	headless: env.HEADLESS,
 	channel: "chrome"
 } satisfies LaunchOptions
 
@@ -62,6 +62,7 @@ const usingLogin = (
 // #region Main
 
 export const scrape = async () => {
+
 	// Launch the browser and open a new blank page
 	const browser = await puppeteer.launch(launchOptions)
 	const [page] = await browser.pages()
@@ -94,6 +95,7 @@ export const scrape = async () => {
 // #region Subroutines
 
 const initAuthCookies = async (page: Page): Promise<void> => {
+
 	// Get last saved auth info
 	const getAuth = await data.get(authDataUrl, Auth)
 	if (!getAuth.success) return
@@ -110,6 +112,7 @@ const initAuthCookies = async (page: Page): Promise<void> => {
 
 
 const checkLoggedIn = async (page: Page): Promise<boolean> => {
+
 	// Go to home page
 	await page.goto(formatPath(baseUrl.href))
 
@@ -132,6 +135,7 @@ const checkLoggedIn = async (page: Page): Promise<boolean> => {
 
 
 const logIn = async (page: Page): Promise<string> => {
+
 	// Go to login page
 	await page.goto(formatPath(baseUrl.href+loginPage))
 
@@ -167,6 +171,7 @@ const logIn = async (page: Page): Promise<string> => {
 
 
 const getOffers = async (page: Page): Promise<OfferSet> => {
+	
 	// Go to offers page
 	await page.goto(formatPath(baseUrl.href+offersPage))
 

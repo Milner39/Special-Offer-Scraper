@@ -15,7 +15,7 @@ import { Offer, OfferSet, OfferMap } from "./src/types"
 
 const main = async () => {
 
-	// Get all offers stored in the json file
+	// Get all offers stored locally
 	const validateOffers = await data.get(offersDataUrl, OfferSet)
 
 	// Create a reference to the stored offers
@@ -33,19 +33,20 @@ const main = async () => {
 	const cronTime = env.MODE === "PROD"
 	// s    m    h    D    M    Wd
 	? "0    0    0    *    *    *   " // Every day
-	: "*/5  *    *    *    *    *   " // Every 5s
+	: "*/10 *    *    *    *    *   " // Every 10s
 
 
-	// Create subroutine to run be run as a cron job
+	/** Subroutine to run be run as a cron job */
 	async function onTick() {
-		// Scrape offers
+
+		// Scrape offers from website
 		const newOffers = await scrape()
 
-		// Get differences between last tick
+		// Get differences between now and last tick
 		const diffs = compareOffersSets(storedOffers, newOffers)
-		console.info(
-			`Offers deleted: ${diffs.deleted.size}\tOffers added: ${diffs.added.size}`
-		)
+
+		console.info(`Offers deleted: ${diffs.deleted.size}\tOffers added: ${diffs.added.size}`)
+
 
 		/* Send alerts of offer changes
 			Do not await because no information is required from the alerter,
@@ -53,10 +54,14 @@ const main = async () => {
 		*/
 		alertToOffers(diffs.deleted, diffs.added)
 
-		// Update stored offers
+
+		// Save offers locally
 		await data.save(offersDataUrl, newOffers)
+
+		// Update reference to stored offers
 		storedOffers = newOffers
 	}
+
 
 	// Create a cron job to be run periodically
 	const job = CronJob.from({ cronTime, onTick })
@@ -67,6 +72,7 @@ const main = async () => {
 		console.info("Initial tick")
 		await onTick()
 	}
+
 
 	// Start cron job
 	console.info("Starting cron job")
@@ -81,13 +87,13 @@ const main = async () => {
 
 // #region Offers Utils
 
-// Subroutine to generate a hash for an offer
+/** Subroutine to generate a hash for an offer */
 const hashOffer = (offer: Offer): string => JSON.stringify(
 	offer, Object.keys(offer).sort()
 )
 
 
-// Merge 2 sets without forcing reference equality, removing duplicates
+/** Merge 2 sets without forcing reference equality, removing duplicates */
 const mergeOffersSets = (setA: OfferSet, setB: OfferSet): OfferSet => {
 	/*
 		The reason why combining sets the regular way will not work, is because
@@ -98,11 +104,20 @@ const mergeOffersSets = (setA: OfferSet, setB: OfferSet): OfferSet => {
 	// Initialise map to hold unique hashes and objects
 	const uniqueOffers: OfferMap = new Map()
 
-	// Iterate over combined sets
-	for (const offer of [...setA, ...setB]) {
-		// Duplicate offers will be removed
-		const offerHash = hashOffer(offer)
-		uniqueOffers.set(offerHash, offer)
+	/* Iterate over sets without creating another set or array of values
+		This is more efficent then using the spread operator to create a single
+		array of offers and iterating through that since a new large array does
+		not need to be instantiated.
+
+		This is not O(n^2) even though the nested for loops may make it 
+		look like it.
+	*/
+	for (const set of [setA, setB]) {
+		for (const offer of set) {
+			// Duplicate offers will be overwritten
+			const offerHash = hashOffer(offer)
+			uniqueOffers.set(offerHash, offer)
+		}
 	}
 
 	// Return values in the final set
@@ -112,7 +127,7 @@ const mergeOffersSets = (setA: OfferSet, setB: OfferSet): OfferSet => {
 }
 
 
-// Return the additions and deletions between 2 sets
+/** Return the deletions and additions between 2 sets */
 const compareOffersSets = (current: OfferSet, updated: OfferSet): {
 	deleted: OfferSet,
 	added: OfferSet

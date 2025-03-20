@@ -3,6 +3,7 @@
 import env from "../../env"
 import * as nodemailer from "nodemailer"
 import type SMTPTransport from "nodemailer/lib/smtp-transport"
+import { Result } from "../types"
 
 // #endregion Imports
 
@@ -10,16 +11,9 @@ import type SMTPTransport from "nodemailer/lib/smtp-transport"
 
 // #region Subroutines
 
-export const createTransport = 
-async ():
-Promise<{
-	result: nodemailer.Transporter,
-	success: true
-} | {
-	result: null,
-	success: false,
-	error: unknown
-}> => {
+export const createTransport = async (): 
+Promise<Result<nodemailer.Transporter>> => {
+
 	// Options for transport
 	const options: SMTPTransport.Options = {
 		service: "gmail",
@@ -36,11 +30,7 @@ Promise<{
 
 	// Verify transport
 	const verification = await verifyTransport(transport)
-	if (!verification.result) return {
-		result: null,
-		success: false,
-		error: verification.error
-	}
+	if (!verification.result) verification
 
 	// Return transport
 	return {
@@ -53,22 +43,19 @@ Promise<{
 // ISSUE: This is ridiculously slow for some reason
 export const verifyTransport = 
 async (transport: nodemailer.Transporter):
-Promise<{
-	result: true,
-	error: null
-} | {
-	result: false,
-	error: unknown
-}> => new Promise((resolve) => {
+Promise<Result<true>> => new Promise((resolve) => {
+
+	// Verify transport
 	transport.verify((error) => {
 		if (error) resolve({
-			result: false,
+			result: null,
+			success: false,
 			error: error
 		})
 
 		resolve({
 			result: true,
-			error: null
+			success: true
 		})
 	})
 })

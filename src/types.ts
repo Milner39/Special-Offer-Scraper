@@ -27,7 +27,26 @@ export type OfferMap = z.infer<typeof OfferMap>
 
 
 
+// #region Auth
+
 export const Auth = z.strictObject({
 	PHPSESSID: z.string()
 })
 export type Auth = z.infer<typeof Auth>
+
+// #endregion Auth
+
+
+
+// #region General
+
+export type Result <T extends unknown> = {
+	result: T,
+	success: true
+} | {
+	result: null,
+	success: false,
+	error: unknown
+}
+
+// #endregion General

@@ -5,6 +5,7 @@ import * as fs from "node:fs"
 import * as path from "node:path"
 import * as json from "../packages/json"
 import { z, ZodSchema } from "zod"
+import { Result } from "./types"
 
 // #endregion Imports
 
@@ -15,6 +16,7 @@ import { z, ZodSchema } from "zod"
 export const save = 
 async (fileUrl: URL, data: unknown):
 Promise<void> => {
+	
 	// Write data to json file
 	await savePlain(fileUrl, json.stringify(data, 4))
 }
@@ -23,6 +25,7 @@ Promise<void> => {
 export const savePlain =
 async (fileUrl: URL, data: string):
 Promise<void> => {
+
 	// Get directory path
 	const dir = path.dirname(fileURLToPath(fileUrl))
 
@@ -42,14 +45,8 @@ Promise<void> => {
 export const get = 
 async <Schema extends ZodSchema>
 (fileUrl: URL, schema: Schema): 
-Promise<{
-	result: z.infer<Schema>,
-	success: true
-} | {
-	result: null,
-	success: false,
-	error: unknown
-}> => {
+Promise<Result<z.infer<Schema>>> => {
+
 	// Get plain data
 	const getPlainData = await getPlain(fileUrl)
 	if (!getPlainData.success) return getPlainData
@@ -75,14 +72,8 @@ Promise<{
 
 export const getPlain = 
 async (fileUrl: URL):
-Promise<{
-	result: string,
-	success: true
-} | {
-	result: null,
-	success: false,
-	error: unknown
-}> => {
+Promise<Result<string>> => {
+
 	// If file does not exist
 	if (!fs.existsSync(fileUrl)) return {
 		result: null,

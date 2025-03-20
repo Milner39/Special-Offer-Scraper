@@ -14,7 +14,7 @@ get very solid time complexities.
 
 Deals that are added can be:
 - [ ] Filtered
-- [ ] Sent to a recipient via email
+- [x] Sent to a recipient via email
 
 You can also add your Fleet Solutions login details to a `.env` file and the 
 scraper will log into your account and only show offers available specifically 
@@ -37,7 +37,7 @@ to your company.
 
 <br>
 
-2.  Create a `.env` file in the project's root. You can check what env options 
+2.  Rename `.env.example` to `.env` file in the project's root. You can check what env options 
     there are in the `env.ts` file.
 
 <br>
