@@ -41,19 +41,24 @@ export const alertToOffers = async (
 	
 	// Checks for early returns
 	if (!usingMailAlerts) return
-	if (added.size < 1) return
 	if (!transportCreation.success) return
+
+
+	// Filter offers
+	const filteredOffers = filter(added)
+	if (filteredOffers.size < 1) return
+	console.info(`Altering recipients to: ${filteredOffers.size} new offer(s)...`)
 
 
 	// Get transport
 	const transport = transportCreation.result
 
 	// Get html
-	const htmlRes = await makeOffersMail(added)
+	const htmlRes = await makeOffersMail(filteredOffers)
 	if (!htmlRes.success) return
 
 	// Get subject
-	const subject = `${added.size} New Offer${added.size === 1 ? "" : "s"} - Fleet Solutions Scraper`
+	const subject = `${filteredOffers.size} New Offer${filteredOffers.size === 1 ? "" : "s"} - Fleet Solutions Scraper`
 
 
 	// Send mail
@@ -66,3 +71,26 @@ export const alertToOffers = async (
 }
 
 // #endregion Main
+
+
+
+// #region Filters
+
+/** Return a set after filtering */
+const filter = (offers: OfferSet) => {
+
+	// Clone the set to not modify the original
+	const offersClone = new Set(offers)
+	
+	// Iterate over set
+	for (const offer of offersClone) {
+		if (offer.fuelType !== "Electric") {
+			offers.delete(offer)
+		}
+	}
+
+	// Return filtered set
+	return offersClone
+}
+
+// #endregion Filters

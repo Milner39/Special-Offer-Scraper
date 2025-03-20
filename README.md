@@ -13,7 +13,7 @@ added to the site, preventing duplicate alerts. Hash Maps and Sets are used to
 get very solid time complexities.
 
 Deals that are added can be:
-- [ ] Filtered
+- [X] Filtered
 - [x] Sent to a recipient via email
 
 You can also add your Fleet Solutions login details to a `.env` file and the 
