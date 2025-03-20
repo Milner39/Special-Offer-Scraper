@@ -30,7 +30,7 @@ Promise<Result<nodemailer.Transporter>> => {
 
 	// Verify transport
 	const verification = await verifyTransport(transport)
-	if (!verification.result) verification
+	if (!verification.result) return verification
 
 	// Return transport
 	return {
