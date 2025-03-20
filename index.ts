@@ -105,7 +105,7 @@ const mergeOffersSets = (setA: OfferSet, setB: OfferSet): OfferSet => {
 	const uniqueOffers: OfferMap = new Map()
 
 	/* Iterate over sets without creating another set or array of values
-		This is more efficent then using the spread operator to create a single
+		This is more efficient then using the spread operator to create a single
 		array of offers and iterating through that since a new large array does
 		not need to be instantiated.
 
