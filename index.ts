@@ -34,7 +34,7 @@ const main = async () => {
 	// Set how frequently cron job should run
 	const cronTime = env.MODE === "PROD"
 	// s    m    h    D    M    Wd
-	? "0    0    0    *    *    *   " // Every day
+	? "0    0    0/12 *    *    *   " // Every 12 hours
 	: "*/10 *    *    *    *    *   " // Every 10s
 
 
