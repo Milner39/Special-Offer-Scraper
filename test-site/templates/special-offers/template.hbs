@@ -1,0 +1,226 @@
+{{!--
+	This a template file (based on a single static page of HTML from the real 
+	Fleet Solutions site) that can be used to test this program without sending 
+	unnecessary requests to the real server.
+
+	All credit for this file goes to Fleet Solutions, although most of the HTML 
+	has been ripped out and replaced.
+
+	Everything else was written by Finn Milner.
+--}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+
+	<title>Special Offers</title>
+</head>
+
+<body>
+	<div class="wrapper">
+		<header class="main-header-new not-logged-in">
+			<a href="#content-of-page" class="skip-to-main-content">Skip to main content</a>
+			<div class="main-header-new-wrapper">
+				<div class="menu-wrapper">
+					<ul class="menu-new">
+						<li>
+							<span class="tr_get-a-quote notranslate" tabindex="0">Get a Quote</span>
+							<div class="submenu-full-wrapper">
+								<div class="submenu-full-container">
+									<div class="submenu-wrapper">
+										<div class="grid-cols-menu-options">
+											<div class="grid-col-4-cols">
+												<a href="/get-a-quote/">
+													<div class="menu-box-img">
+														<div class="menu-box-overlay">
+															<h3 class="tr_i-know-what-i-want notranslate">
+																I Know What I Want
+															</h3>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="grid-col-4-cols">
+												<a href="/special-offers/">
+													<div class="menu-box-img">
+														<div class="menu-box-overlay">
+															<h3 class="tr_special-offers notranslate">
+																Special Offers
+															</h3>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="grid-col-4-cols">
+												<a href="/stock-vehicles/">
+													<div class="menu-box-img">
+														<div class="menu-box-overlay">
+															<h3 class="tr_used-stock-vehicles notranslate">
+																Used Stock Vehicles
+															</h3>
+														</div>
+													</div>
+												</a>
+											</div>
+											<div class="grid-col-4-cols">
+												<a href="/help-me-choose/">
+													<div class="menu-box-img">
+														<div class="menu-box-overlay">
+															<h3 class="tr_help-me-choose notranslate">
+																Help Me Choose
+															</h3>
+														</div>
+													</div>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li class="submenu-basic-top-level">
+							<span class="tr_help-and-contact notranslate" tabindex="0">Help & Contact</span>
+							<ul class="submenu-basic">
+								<li>
+									<a href="/faqs/"><span class="tr_faqs notranslate">FAQs / Contact</span></a>
+								</li>
+								<li>
+									<a href="/telephone/"><span class="tr_telephone notranslate">Telephone</span></a>
+								</li>
+							</ul>
+						</li>
+						<li class="submenu-basic-top-level">
+							<a class="tr_my-account notranslate" href="/my-account/">My Account</a>
+						</li>
+						<li>
+							<a class="tr_about-us notranslate" href="/about-us/">About Us</a>
+						</li>
+					</ul>
+				</div>
+				<div class="logo-wrapper">
+				</div>
+				<div class="main-header-right">
+					<div id="header-icons-wrapper" class="header-icons-wrapper">
+						<span class="icon-with-tooltip">
+							<div class="goog-te" id="google_translate_element" title="Language"></div>
+						</span>
+						<span tabindex="0" class="icon-with-tooltip notranslate">
+							<i class="material-icons">&#xE0CD;</i>
+							<div class="icon-tooltip">
+								<a href="tel:0344 811 8228">0344 811 8228</a>
+							</div>
+						</span>
+						<a href="/login/" class="header-icon-link header-icon-mobile header-icon-login" title="Login">
+							<i class="fa fa-sign-in" aria-hidden="true"></i>
+						</a>
+					</div>
+					<div class="login-wrapper">
+						<a href="/login/" data-id="2" class="button primary-button" title="Login">
+							<span class="tr_login-register notranslate">Login / Register</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<section id="content-of-page" class="page-title-section">
+			<div class="row">
+				<div class="page-title-wrapper">
+					<h1 class="tr_special-offers notranslate">
+						Special Offers
+					</h1>
+				</div>
+			</div>
+		</section>
+		<section class="default-content-section">
+			<div class="row">
+				<p class="special-offers-message" style="display: none">
+					When logged in, vehicles not available to your
+					organisation will not be shown.
+				</p>
+				<div class="grid-cols-wrapper special-offers-cols special-offers-grid" data-scroll-watch>
+					{{#each offers as |offer|}}
+
+					<div class="grid-col-6 {{fuelTypeToClassName offer.fuelType}}" id="single-special">
+						<div class="special-offer-wrapper">
+							<a href="{{offer.link}}">
+								<div class="grid-cols-wrapper special-offer-cols-wrapper">
+									<div class="grid-col-5 special-offer-image">
+										<img 
+											src="{{offer.img}}"
+											class="special-offer-thumbnail-image lazy"
+										/>
+									</div>
+									<div class="grid-col-7 special-offer-content">
+										<h3 class="car-title">{{offer.title}}</h3>
+										<div class="car-details">
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE422;</i></span>
+												<span class="detail-content">
+													<span class="tr_lease-length notranslate">Lease Length</span>:
+													<span>{{offer.leaseLength}}</span>
+												</span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE614;</i></span>
+												<span class="detail-content">
+													<span class="tr_availability notranslate">Availability</span>:
+													<span>{{offer.availability}}</span>
+												</span>
+											</span>
+											<span class="detail">
+												<span class="detail-icon"><i class="material-icons">&#xE546;</i></span>
+												<span class="detail-content">
+													<span classs="tr_fuel-type notranslate">Fuel Type</span>:
+													<span>{{offer.fuelType}}</span>
+												</span>
+											</span>
+										</div>
+									</div>
+								</div>
+							</a>
+						</div>
+					</div>
+
+					{{/each}}
+				</div>
+			</div>
+		</section>
+	</div>
+	<footer class="main-footer">
+		<div class="row row-padding-x row-no-bg">
+			<div class="grid-cols-wrapper">
+				<div class="grid-col-4 footer-col footer-left">
+					<ul>
+						<li>
+							<a class="tr_privacy-cookie-notice notranslate" href="/privacycookienotice/">Privacy & Cookie Notice</a>
+						</li>
+						<li>
+							<a class="tr_use-of-cookies notranslate" href="/useofcookies/">Use of Cookies</a>
+						</li>
+						<li>
+							<a href="/accessibilitystatement/">Accessibility Statement</a>
+						</li>
+					</ul>
+				</div>
+				<div class="grid-col-4 footer-col footer-center">
+					<p>&copy; 2012 - 2025 Fleet Solutions</p>
+				</div>
+				<div class="grid-col-4 footer-col footer-right">
+					<ul>
+						<li>
+							<span class="tr_opening-hours notranslate">Opening Hours</span>: 09:00 to 17:00, Monday to Friday
+						</li>
+						<li>
+							<span class="tr_telephone notranslate">Telephone</span>: <a href="tel:0344 811 8228">0344 811 8228</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>

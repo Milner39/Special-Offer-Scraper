@@ -2,7 +2,7 @@
 
 import { URL } from "node:url"
 import { compileHtml } from "../../../../packages/handlebars"
-import { OfferSet, Result } from "../../../types"
+import { OfferSet } from "../../../types"
 
 // #endregion Imports
 

@@ -9,6 +9,9 @@ node_modules
 # Scraped data
 **/data
 
+# Compiled files
+**/out
+
 # Environment variables but not the `env.example` files
 .env
 .env.*

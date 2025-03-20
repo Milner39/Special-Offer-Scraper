@@ -12,6 +12,7 @@ import { Result } from "../src/types"
 type CompileHtmlOptions = {
 	templateUrl: URL,
 	context: Record<string, unknown>,
+	helpers?: Map<string, handlebars.HelperDelegate>,
 	outUrl?: URL
 }
 
@@ -29,6 +30,13 @@ Promise<Result<string>> => {
 	if (!getTemplateSource.success) return getTemplateSource
 
 	try {
+		// Register helpers
+		if (typeof options.helpers !== "undefined") {
+			for (const [name, func] of options.helpers.entries()) {
+				handlebars.registerHelper(name, func)
+			}
+		}
+
 		// Compile html
 		const html = handlebars.compile(getTemplateSource.result)(
 			options.context
