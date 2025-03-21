@@ -68,7 +68,6 @@ export const scrape = async () => {
 	// Compile test site if not in production
 	if (env.MODE !== "PROD") {
 		const res = await makeTestSite()
-		console.log(res)
 	}
 
 	// Launch the browser and open a new blank page
