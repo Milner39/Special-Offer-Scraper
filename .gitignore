@@ -6,11 +6,11 @@
 # Installed dependencies
 node_modules
 
-# Scraped data
-**/data
-
 # Compiled files
-**/out
+/build
+
+# Output files
+/out
 
 # Environment variables but not the `env.example` files
 .env

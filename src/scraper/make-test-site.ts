@@ -1,8 +1,9 @@
 // #region Imports
 
 import { URL } from "node:url"
-import { compileHtml } from "../../../packages/handlebars"
-import { OfferSet } from "../../../src/types"
+import { rootUrl } from "../../root"
+import { compileHtml } from "../../packages/handlebars"
+import { OfferSet } from "../types"
 
 // #endregion Imports
 
@@ -292,6 +293,17 @@ const offers: OfferSet = new Set([
 
 // #region Main
 
+const templateUrl = new URL(
+	"./static/test-site/templates/special-offers/template.hbs", 
+	rootUrl
+)
+const outUrl = new URL(
+	"./out/test-site/special-offers/index.html",
+	rootUrl
+)
+
+
+
 const fuelTypeToClassSuffix = {
 	"Electric": "Electric",
 	"Hybrid / Electric": "Hybrid",
@@ -308,14 +320,14 @@ const fuelTypeToClassName = (fuelType: FuelType) => {
 export default async () => {
 	// Compile template file with configured options
 	return await compileHtml({
-		templateUrl: new URL("./template.hbs", import.meta.url),
+		templateUrl,
+		outUrl,
 		context: {
 			offers: Array.from(offers)
 		},
 		helpers: new Map([
 			["fuelTypeToClassName", fuelTypeToClassName]
-		]),
-		outUrl: new URL("../../out/special-offers/index.html", import.meta.url)
+		])
 	})
 }
 

@@ -1,6 +1,7 @@
 // #region Imports
 
 import { URL } from "node:url"
+import { rootUrl } from "./root"
 import loadEnv from "./packages/load-env"
 import { z } from "zod"
 import * as zz from "./packages/zod"
@@ -10,7 +11,7 @@ import * as zz from "./packages/zod"
 
 
 // Create URL to env file
-const envURL = new URL("./.env", import.meta.url)
+const envURL = new URL("./.env", rootUrl)
 
 
 // Create schema for env vars

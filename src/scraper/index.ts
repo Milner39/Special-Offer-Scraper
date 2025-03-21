@@ -2,8 +2,9 @@
 
 import env from "../../env"
 import { URL } from "node:url"
+import { rootUrl } from "../../root"
 import puppeteer, { LaunchOptions, Page } from "puppeteer-core"
-import makeTestSite from "../../test-site/templates/special-offers"
+import makeTestSite from "./make-test-site"
 import { OfferSet, Auth } from "../types"
 import * as data from "../../packages/persistent-data"
 
@@ -21,10 +22,10 @@ const launchOptions = {
 
 
 export const offersDataUrl = new URL(
-	`./data/offers-${env.MODE}.json`, import.meta.url
+	`./out/scraper/offers-${env.MODE}.json`, rootUrl
 )
 const authDataUrl = new URL(
-	`./data/auth.json`, import.meta.url
+	`./out/scraper/auth.json`, rootUrl
 )
 
 
@@ -32,7 +33,7 @@ const authDataUrl = new URL(
 const pageUrl = new URL("https://www.nhsfleetsolutions.co.uk")
 const baseUrl = env.MODE === "PROD"
 	? pageUrl
-	: new URL("../../test-site/out", import.meta.url)
+	: new URL("./out/test-site", rootUrl)
 
 const loginPage = "/login"
 const offersPage = "/special-offers"
@@ -65,7 +66,10 @@ const usingLogin = (
 export const scrape = async () => {
 
 	// Compile test site if not in production
-	if (env.MODE !== "PROD") await makeTestSite()
+	if (env.MODE !== "PROD") {
+		const res = await makeTestSite()
+		console.log(res)
+	}
 
 	// Launch the browser and open a new blank page
 	const browser = await puppeteer.launch(launchOptions)
