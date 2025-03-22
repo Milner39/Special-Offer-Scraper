@@ -1,9 +1,9 @@
 // #region Imports
 
-import env from "../../env"
 import * as nodemailer from "nodemailer"
 import type SMTPTransport from "nodemailer/lib/smtp-transport"
-import { Result } from "../types"
+import env from "@/env"
+import { Result } from "src/types"
 
 // #endregion Imports
 

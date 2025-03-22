@@ -1,10 +1,10 @@
 // #region Imports
 
-import { URL } from "node:url"
-import { rootUrl } from "./root"
-import loadEnv from "./packages/load-env"
 import { z } from "zod"
-import * as zz from "./packages/zod"
+import { rootUrl } from "@/root"
+import loadEnv from "pkg/load-env"
+import * as zz from "pkg/zod"
+import { URL } from "node:url"
 
 // #endregion Imports
 

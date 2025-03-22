@@ -1,11 +1,11 @@
 // #region Imports
 
+import { z, ZodSchema } from "zod"
+import { Result } from "src/types"
+import * as json from "pkg/json"
 import { fileURLToPath, URL } from "node:url"
 import * as fs from "node:fs"
 import * as path from "node:path"
-import * as json from "./json"
-import { z, ZodSchema } from "zod"
-import { Result } from "../src/types"
 
 // #endregion Imports
 

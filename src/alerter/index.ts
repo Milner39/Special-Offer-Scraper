@@ -1,7 +1,7 @@
 // #region Imports
 
-import env from "../../env"
-import { OfferSet, Result } from "../types"
+import env from "@/env"
+import { OfferSet, Result } from "src/types"
 import { createTransport } from "./mail-transport"
 import makeOffersMail from "./html/new-offers"
 

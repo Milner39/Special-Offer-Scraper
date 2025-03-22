@@ -1,12 +1,12 @@
 // #region Imports
 
-import env from "../../env"
-import { URL } from "node:url"
-import { rootUrl } from "../../root"
 import puppeteer, { LaunchOptions, Page } from "puppeteer-core"
+import env from "@/env"
+import { rootUrl } from "@/root"
+import { OfferSet, Auth, Result } from "src/types"
+import * as data from "pkg/persistent-data"
 import makeTestSite from "./make-test-site"
-import { OfferSet, Auth, Result } from "../types"
-import * as data from "../../packages/persistent-data"
+import { URL } from "node:url"
 
 // #endregion Imports
 

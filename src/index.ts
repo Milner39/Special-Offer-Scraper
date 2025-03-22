@@ -1,11 +1,11 @@
 // #region Imports
 
-import env from "../env"
-import { scrape, offersDataUrl, usingLogin } from "./scraper"
-import { alertToOffers, usingMailAlerts } from "./alerter"
-import * as data from "../packages/persistent-data"
 import { CronJob } from "cron"
-import { Offer, OfferSet, OfferMap } from "./types"
+import env from "@/env"
+import { scrape, offersDataUrl, usingLogin } from "src/scraper"
+import { alertToOffers, usingMailAlerts } from "src/alerter"
+import { Offer, OfferSet, OfferMap } from "src/types"
+import * as data from "pkg/persistent-data"
 
 // #endregion Imports
 

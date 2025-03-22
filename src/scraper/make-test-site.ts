@@ -1,9 +1,9 @@
 // #region Imports
 
+import { rootUrl } from "@/root"
+import { OfferSet } from "src/types"
+import { compileHtml } from "pkg/handlebars"
 import { URL } from "node:url"
-import { rootUrl } from "../../root"
-import { compileHtml } from "../../packages/handlebars"
-import { OfferSet } from "../types"
 
 // #endregion Imports
 

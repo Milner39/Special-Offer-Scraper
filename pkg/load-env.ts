@@ -1,8 +1,8 @@
 // #region Imports
 
 import * as dotenv from "dotenv"
-import { fileURLToPath, URL } from "node:url"
 import { z, ZodSchema } from "zod"
+import { fileURLToPath, URL } from "node:url"
 import * as process from "node:process"
 
 // #endregion Imports

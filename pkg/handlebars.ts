@@ -1,9 +1,9 @@
 // #region Imports
 
-import { URL } from "node:url"
 import handlebars from "handlebars"
-import * as data from "./persistent-data"
-import { Result } from "../src/types"
+import { Result } from "src/types"
+import * as data from "pkg/persistent-data"
+import { URL } from "node:url"
 
 // #endregion Imports
 

@@ -1,16 +1,16 @@
 // #region Imports
 
 import { URL } from "node:url"
-import { rootUrl } from "../../../../root"
-import { compileHtml } from "../../../../packages/handlebars"
-import { OfferSet } from "../../../types"
+import { rootUrl } from "@/root"
+import { OfferSet } from "src/types"
+import { compileHtml } from "pkg/handlebars"
 
 // #endregion Imports
 
 
 
 const templateUrl = new URL(
-	"./static/alerter/html/templates/new-offers/template.hbs", 
+	"./static/alerter/html/templates/new-offers/template.hbs",
 	rootUrl
 )
 
