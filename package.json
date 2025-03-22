@@ -7,8 +7,8 @@
 	},
 	"scripts": {
 		"drun": "deno run --config=./deno.jsonc -A --unstable-sloppy-imports",
-		"start": "pnpm run drun ./",
-		"compile": "deno compile --config=./deno.jsonc -A --unstable-sloppy-imports -o ./build/scraper ./index.ts"
+		"start": "pnpm run drun ./src",
+		"compile": "deno compile --output=./build/scraper --config=./deno.jsonc -A --unstable-sloppy-imports ./src/index.ts"
 	},
 	"dependencies": {
 		"@types/node": "^22.13.10",
