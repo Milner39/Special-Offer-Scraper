@@ -25,24 +25,45 @@ to your company.
 
 * You must have a version of Chrome installed.
 
-* You must have deno installed (tsx is buggy).
+* You must have deno installed.
 
+<br>
 
 ## How To Use
 
-1.  Install dependencies.
+### Running
+
+1.  Install dependencies with:
     ```bash
     pnpm i
     ```
 
 <br>
 
-2.  Rename `.env.example` to `.env` file in the project's root. You can check what env options 
-    there are in the `env.ts` file.
+2.  Rename `.env.example` to `.env` file in the project's root. You can check 
+    what env options there are in the `env.ts` file.
 
 <br>
 
-3.  Start.
+3.  Start the application with:
     ```bash
     pnpm run start
     ```
+
+<br>
+
+### Compiling
+
+1.  Compile the application with:
+    ```bash
+    pnpm run compile
+    ```
+
+<br>
+
+2.  Copy `./.env` and `./static` into `./build`, these files are needed for the 
+    executable to run.
+
+<br>
+
+3. Start the `scraper.exe` file however you like.
