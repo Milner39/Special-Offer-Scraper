@@ -1,7 +1,7 @@
 // #region Imports
 
 import env from "../../env"
-import { OfferSet } from "../types"
+import { OfferSet, Result } from "../types"
 import { createTransport } from "./mail-transport"
 import makeOffersMail from "./html/new-offers"
 
@@ -28,7 +28,7 @@ export const usingMailAlerts = (
 // Create in global scope because creation takes very long
 const transportCreation = usingMailAlerts
 	? await createTransport() 
-	: { success: false } as const
+	: { success: false, error: "Not using mail alerts" } as const
 
 
 
@@ -37,37 +37,57 @@ const transportCreation = usingMailAlerts
 export const alertToOffers = async (
 	deleted: OfferSet = new Set(),
 	added: OfferSet = new Set()
-) => {
+): Promise<Result<string>> => {
 	
 	// Checks for early returns
-	if (!usingMailAlerts) return
-	if (!transportCreation.success) return
+	if (!usingMailAlerts) return {
+		result: "Not using mail alerts",
+		success: true
+	}
+	if (!transportCreation.success) return {
+		result: null,
+		success: false,
+		error: `Could not create transport: ${transportCreation.error}`
+	}
 
 
 	// Filter offers
 	const filteredOffers = filter(added)
-	if (filteredOffers.size < 1) return
-	console.info(`Altering recipients to: ${filteredOffers.size} new offer(s)`)
+	if (filteredOffers.size < 1) return {
+		result: "No offers to alert to",
+		success: true
+	}
+	console.info(`Alerting recipients to: ${filteredOffers.size} new offer(s)`)
 
 
 	// Get transport
 	const transport = transportCreation.result
 
 	// Get html
-	const htmlRes = await makeOffersMail(filteredOffers)
-	if (!htmlRes.success) return
+	const makeMailHtml = await makeOffersMail(filteredOffers)
+	if (!makeMailHtml.success) return {
+		result: null,
+		success: false,
+		error: `Could not compile mail html: ${makeMailHtml.error}`
+	}
 
 	// Get subject
 	const subject = `${filteredOffers.size} New Offer${filteredOffers.size === 1 ? "" : "s"} - Fleet Solutions Scraper`
 
 
 	// Send mail
-	await transport.sendMail({
+	const sentMail = await transport.sendMail({
 		to: env.ALERTER_RECIPIENT,
 		from: env.ALERTER_EMAIL_USER,
 		subject: subject,
-		html: htmlRes.result
+		html: makeMailHtml.result
 	})
+
+	// Return success
+	return {
+		result: "Mail sent",
+		success: true,
+	}
 }
 
 // #endregion Main

@@ -2,7 +2,7 @@
 
 import env from "./env"
 import { scrape, offersDataUrl, usingLogin } from "./src/scraper"
-import { alertToOffers } from "./src/alerter"
+import { alertToOffers, usingMailAlerts } from "./src/alerter"
 import * as data from "./packages/persistent-data"
 import { CronJob } from "cron"
 import { Offer, OfferSet, OfferMap } from "./src/types"
@@ -17,6 +17,7 @@ const main = async () => {
 
 	console.info(`Running in ${env.MODE} mode`)
 	if (usingLogin) console.info("Using Fleet Solutions login")
+	if (usingMailAlerts) console.info("Using mail alerts")
 
 
 	// Get all offers stored locally
@@ -62,12 +63,17 @@ const main = async () => {
 		console.info(`Offers deleted: ${diffs.deleted.size}, added: ${diffs.added.size}`)
 		
 
-
-		/* Send alerts of offer changes
-			Do not await because no information is required from the alerter,
-			and it is slow to execute.
-		*/
-		alertToOffers(diffs.deleted, diffs.added)
+		// Send alerts of offer changes
+		if (diffs.deleted.size > 0 || diffs.added.size > 0) {
+			console.info("Sending alerts...")
+			
+			const alert = await alertToOffers(diffs.deleted, diffs.added)
+			if (!alert.success) {
+				console.error(`Could not alert to offers: ${alert.error}`)
+			} else {
+				console.info("Alerts sent")
+			}
+		}
 
 
 		// Save offers locally
