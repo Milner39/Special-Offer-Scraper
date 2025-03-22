@@ -73,6 +73,7 @@ const main = async () => {
 			const alert = await alertToOffers(diffs.deleted, diffs.added)
 			if (!alert.success) {
 				console.error(`Could not alert to offers: ${alert.error}`)
+				return
 			} else {
 				console.info("Alerts sent")
 			}
