@@ -9,11 +9,11 @@
 
 
 <body>
-	<table style="width: 100%; align: center;">
+	<table {{raw tableStyle}}>
 		<tr>
 			<td>
 				{{!-- Main Container --}}
-				<table style="width: 100%; align: center;">
+				<table {{raw tableStyle}}>
 
 					{{!-- Heading --}}
 					<tr>
@@ -25,7 +25,7 @@
 					{{!-- Offers Section --}}
 					<tr>
 						<td>
-							<table style="width: 100%; align: center;">
+							<table {{raw tableStyle}}>
 
 								{{!-- Sub Heading --}}
 								<tr>
@@ -37,14 +37,14 @@
 								{{!-- Offers --}}
 								<tr>
 									<td>
-										<table style="width: 100%; align: center;">
+										<table {{raw tableStyle}}>
 
 										{{#each offers as |offer|}}
 											{{!-- Offer --}}
 											<tr>
 												<td style="padding: 14px;">
 													<a href="{{offer.link}}" style="text-decoration: none; color: inherit;">
-														<table style="width: 100%; align: center;">
+														<table {{raw tableStyle}}>
 
 															{{!-- Title --}}
 															<tr>
