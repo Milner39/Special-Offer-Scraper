@@ -1,7 +1,7 @@
 // #region Imports
 
 import env from "./env"
-import { scrape, offersDataUrl } from "./src/scraper"
+import { scrape, offersDataUrl, usingLogin } from "./src/scraper"
 import { alertToOffers } from "./src/alerter"
 import * as data from "./packages/persistent-data"
 import { CronJob } from "cron"
@@ -16,16 +16,23 @@ import { Offer, OfferSet, OfferMap } from "./src/types"
 const main = async () => {
 
 	console.info(`Running in ${env.MODE} mode`)
+	if (usingLogin) console.info("Using Fleet Solutions login")
+
 
 	// Get all offers stored locally
-	const validateOffers = await data.get(offersDataUrl, OfferSet)
+	const getLocalOffers = await data.get(offersDataUrl, OfferSet)
 
 	// Create a reference to the stored offers
-	let storedOffers: OfferSet = validateOffers.success
-		? validateOffers.result
+	let storedOffers: OfferSet = getLocalOffers.success
+		? getLocalOffers.result
 		: new Set()
 	
-	console.info(`Already seen offers: ${storedOffers.size}`)
+	// Appropriate log message
+	if (getLocalOffers.success) {
+		console.info(`Offers stored locally: ${storedOffers.size}`)
+	} else {
+		console.error(`Could not find any offers stored locally: ${getLocalOffers.error}`)
+	}
 
 
 
@@ -34,20 +41,26 @@ const main = async () => {
 	// Set how frequently cron job should run
 	const cronTime = env.MODE === "PROD"
 	// s    m    h    D    M    Wd
-	? "0    0    0/1  *    *    *   " // Every hour
+	? "0    0    */1  *    *    *   " // Every hour
 	: "*/10 *    *    *    *    *   " // Every 10s
 
 
 	/** Subroutine to run be run as a cron job */
 	async function onTick() {
 
+		console.info("Scraping offers...")
+
 		// Scrape offers from website
-		const newOffers = await scrape()
+		const getNewOffers = await scrape()
+		if (!getNewOffers.success) {
+			console.error(`Could not scrape offers: ${getNewOffers.error}`)
+			return
+		}
 
 		// Get differences between now and last tick
-		const diffs = compareOffersSets(storedOffers, newOffers)
-
-		console.info(`Offers deleted: ${diffs.deleted.size}\tOffers added: ${diffs.added.size}`)
+		const diffs = compareOffersSets(storedOffers, getNewOffers.result)
+		console.info(`Offers deleted: ${diffs.deleted.size}, added: ${diffs.added.size}`)
+		
 
 
 		/* Send alerts of offer changes
@@ -58,10 +71,13 @@ const main = async () => {
 
 
 		// Save offers locally
-		await data.save(offersDataUrl, newOffers)
+		const saveLocalOffers = await data.save(offersDataUrl, getNewOffers.result)
+		if (!saveLocalOffers.success) {
+			console.error(`Could not save offers locally: ${saveLocalOffers.error}`)
+		}
 
 		// Update reference to stored offers
-		storedOffers = newOffers
+		storedOffers = getNewOffers.result
 	}
 
 

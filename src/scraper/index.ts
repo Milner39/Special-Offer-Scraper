@@ -5,7 +5,7 @@ import { URL } from "node:url"
 import { rootUrl } from "../../root"
 import puppeteer, { LaunchOptions, Page } from "puppeteer-core"
 import makeTestSite from "./make-test-site"
-import { OfferSet, Auth } from "../types"
+import { OfferSet, Auth, Result } from "../types"
 import * as data from "../../packages/persistent-data"
 
 // #endregion Imports
@@ -48,7 +48,7 @@ const formatPath = (path: string) => {
 
 
 
-const usingLogin = (
+export const usingLogin = (
 	// In production
 	env.MODE === "PROD" &&
 
@@ -63,11 +63,16 @@ const usingLogin = (
 
 // #region Main
 
-export const scrape = async () => {
+export const scrape = async (): Promise<Result<OfferSet>> => {
 
 	// Compile test site if not in production
 	if (env.MODE !== "PROD") {
-		const res = await makeTestSite()
+		const compileTestSite = await makeTestSite()
+		if (!compileTestSite.success) return {
+			result: null,
+			success: false,
+			error: `Could not compile test site: ${compileTestSite.error}`
+		}
 	}
 
 	// Launch the browser and open a new blank page
@@ -78,21 +83,48 @@ export const scrape = async () => {
 
 	// If using login, ensure page is logged in
 	if (usingLogin) {
-		// Set set auth cookies to their last saved values
-		await initAuthCookies(page)
+
+		// Set auth cookies to their last saved values
+		const setCookies = await initAuthCookies(page)
+		if (!setCookies.success) return {
+			result: null,
+			success: false,
+			error: `Could not set auth cookies: ${setCookies.error}`
+		}
 
 		// Check if new auth cookies are needed, and log in
-		if (!(await checkLoggedIn(page))) await logIn(page)
+		const checkLoggedInToPage = await checkLoggedIn(page)
+		if (!checkLoggedInToPage.success) return {
+			result: null,
+			success: false,
+			error: `Could not check login status: ${checkLoggedInToPage.error}`
+		}
+		if (!checkLoggedInToPage.result) {
+			const logInToPage = await logIn(page)
+			if (!logInToPage.success) return {
+				result: null,
+				success: false,
+				error: `Could not login: ${logInToPage.error}`
+			}
+		}
 	}
 
 	// Get offers
-	const offers = await getOffers(page)
+	const getOffersFromPage = await getOffers(page)
+	if (!getOffersFromPage.success) return {
+		result: null,
+		success: false,
+		error: `Could not get offers: ${getOffersFromPage.result}`
+	}
 
 	// close browser
 	await browser.close()
 
 	// return offers
-	return offers
+	return {
+		result: getOffersFromPage.result,
+		success: true
+	}
 }
 
 // #endregion Main
@@ -101,11 +133,17 @@ export const scrape = async () => {
 
 // #region Subroutines
 
-const initAuthCookies = async (page: Page): Promise<void> => {
+const initAuthCookies = async (page: Page): Promise<Result<boolean>> => {
 
 	// Get last saved auth info
 	const getAuth = await data.get(authDataUrl, Auth)
-	if (!getAuth.success) return
+	if (!getAuth.success) {
+		console.error(`Could not get Fleet Solutions auth locally: ${getAuth.error}`)
+		return {
+			result: false,
+			success: true
+		}
+	}
 
 	// Set cookie on page
 	await page.browser().setCookie({
@@ -115,17 +153,27 @@ const initAuthCookies = async (page: Page): Promise<void> => {
 		httpOnly: true,
 		secure: true
 	})
+
+	// Return success
+	return {
+		result: true,
+		success: true
+	}
 }
 
 
-const checkLoggedIn = async (page: Page): Promise<boolean> => {
+const checkLoggedIn = async (page: Page): Promise<Result<boolean>> => {
 
 	// Go to home page
 	await page.goto(formatPath(baseUrl.href))
 
 	// Get the header element
 	const header = await page.$("header")
-	if (!header) throw new Error("Unable to find header")
+	if (!header) return {
+		result: null,
+		success: false,
+		error: "Could not find header"
+	}
 
 	// Get classes on header
 	const classes = new Set(await header.evaluate(
@@ -137,18 +185,25 @@ const checkLoggedIn = async (page: Page): Promise<boolean> => {
 		logged in ? "logged-in" : "not-logged-in"
 	*/
 	// Return logged in status
-	return classes.has("logged-in")
+	return {
+		result: classes.has("logged-in"),
+		success: true,
+	}
 }
 
 
-const logIn = async (page: Page): Promise<string> => {
+const logIn = async (page: Page): Promise<Result<string>> => {
 
 	// Go to login page
 	await page.goto(formatPath(baseUrl.href+loginPage))
 
 	// Fill out login form
 	const form = await page.$("form")
-	if (!form) throw new Error("Unable to find form")
+	if (!form) return {
+		result: null,
+		success: false,
+		error: "Could not find form"
+	}
 	await form.frame.locator("#login_email").fill(env.FLT_SOL_EMAIL || "")
 	await form.frame.locator("#login_password").fill(env.FLT_SOL_PASS || "")
 
@@ -165,26 +220,40 @@ const logIn = async (page: Page): Promise<string> => {
 	// Get session id from cookies
 	const match = cookies.match(/PHPSESSID=([^;]+)/)
 	const sessionId = match ? match[1] : null
-	if (!sessionId) throw new Error("Login details incorrect")
+	if (!sessionId) return {
+		result: null,
+		success: false,
+		error: "Login details incorrect"
+	}
 
 	// Save auth info locally
-	await data.save(authDataUrl, {
+	const saveAuth = await data.save(authDataUrl, {
 		PHPSESSID: sessionId
 	} satisfies Auth)
+	if (!saveAuth.success) {
+		console.error(`Could not save Fleet Solutions auth locally: ${saveAuth.error}`)
+	}
 
 	// Return session id
-	return sessionId
+	return {
+		result: sessionId,
+		success: true
+	}
 }
 
 
-const getOffers = async (page: Page): Promise<OfferSet> => {
+const getOffers = async (page: Page): Promise<Result<OfferSet>> => {
 	
 	// Go to offers page
 	await page.goto(formatPath(baseUrl.href+offersPage))
 
 	// Get div containing offers
 	const offersGrid = await page.$(".special-offers-cols, .special-offers-grid")
-	if (!offersGrid) throw new Error("Unable to find offers gird")
+	if (!offersGrid) return {
+		result: null,
+		success: false,
+		error: "Could not find offers gird"
+	}
 	
 	// Get all offers
 	const offers: OfferSet = new Set(
@@ -232,11 +301,11 @@ const getOffers = async (page: Page): Promise<OfferSet> => {
 		}, [pageUrl] as const)
 	)
 
-	// Save offer info locally
-	await data.save(offersDataUrl, offers)
-
 	// Return all offers
-	return offers
+	return {
+		result: offers,
+		success: true
+	}
 }
 
 // #endregion Subroutines
