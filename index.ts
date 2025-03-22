@@ -64,7 +64,10 @@ const main = async () => {
 		
 
 		// Send alerts of offer changes
-		if (diffs.deleted.size > 0 || diffs.added.size > 0) {
+		if (
+			(diffs.deleted.size > 0 || diffs.added.size > 0) &&
+			usingMailAlerts
+		) {
 			console.info("Sending alerts...")
 			
 			const alert = await alertToOffers(diffs.deleted, diffs.added)
