@@ -1,6 +1,5 @@
 // #region Imports
 
-import handlebars from "handlebars"
 import { URL } from "node:url"
 import { rootUrl } from "@/root"
 import { OfferSet } from "src/types"
@@ -17,10 +16,6 @@ const templateUrl = new URL(
 
 
 
-const raw = (str: string) => {
-	return new handlebars.SafeString(str)
-}
-
 export default async (offers: OfferSet) => {
 	// Compile template file with configured options
 	return await compileHtml({
@@ -29,10 +24,14 @@ export default async (offers: OfferSet) => {
 			single: offers.size === 1,
 			offers: Array.from(offers),
 
-			tableStyle: 'style="width: 100%; border-spacing: 0;"'
-		},
-		helpers: new Map([
-			["raw", raw]
-		])
+			allStyle: "box-sizing: border-box;",
+			"bg-clr-1": "#1c1c1c",
+			"bg-clr-2": "#292929",
+			"bg-clr-3": "#3b3b3b",
+			"pm-clr-1": "#0090a6",
+			"tx-clr-1": "rgba(255,255,255,95%)",
+			"tx-clr-2": "rgba(255,255,255,82.5%)",
+			"tx-clr-3": "rgba(255,255,255,70%)"
+		}
 	})
 }

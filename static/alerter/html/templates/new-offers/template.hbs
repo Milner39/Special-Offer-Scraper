@@ -1,84 +1,67 @@
 <html>
 
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
-:root {
-	font-family: "Roboto", sans-serif;
-}
-</style>
-
-
 <body>
-	<table {{raw tableStyle}}>
-		<tr>
-			<td>
-				{{!-- Main Container --}}
-				<table {{raw tableStyle}}>
+	<div style="
+		{{@root.allStyle}}
+		width: 100%; max-width: 640px;
+		padding: 0; margin: 0 auto;
+		border: 1px solid {{@root.bg-clr-3}}; border-radius: 12px;
+		background-color: {{@root.bg-clr-1}};
+		font-size: 16px; color: {{@root.tx-clr-1}};
+		overflow: hidden;
+	">
+		{{!-- Main Container --}}
+		<div>
 
-					{{!-- Heading --}}
-					<tr>
-						<td style="padding: 16px; text-align: center; font-size: 18px;">
-							<strong>There {{#if single}}is{{else}}are{{/if}} {{offers.length}} new offer{{#unless single}}s{{/unless}} for you to view!</strong>
-						</td>
-					</tr>
+			{{!-- Heading --}}
+			<div style="
+				{{@root.allStyle}}
+				padding: 16px;
+				border-top: 8px solid {{@root.pm-clr-1}};
+				text-align: center; font-size: 18px; color: {{@root.tx-clr-1}}
+			">
+				<strong>
+					There {{#if @root.single}}is{{else}}are{{/if}} {{@root.offers.length}} 
+					new offer{{#unless @root.single}}s{{/unless}} for you to view!
+				</strong>
 
-					{{!-- Offers Section --}}
-					<tr>
-						<td>
-							<table {{raw tableStyle}}>
+				{{!-- Sub Heading --}}
+				<div style="font-size: 14px; color: {{@root.tx-clr-3}}">
+					New offers based on your selected filters:
+				</div>
+			</div>
 
-								{{!-- Sub Heading --}}
-								<tr>
-									<td style="padding: 16px; text-align: center; font-size: 16px;">
-										New offers based on your selected filters:
-									</td>
-								</tr>
+			{{!-- Offers --}}
+			<div style="{{@root.allStyle}} padding: 16px 0;">
+			{{#each @root.offers as |offer|}}
+				{{!-- Offer --}}
+				<div style="
+					{{@root.allStyle}}
+					padding: 8px; margin: 0 16px; {{#unless @last}}margin-bottom: 16px;{{/unless}}
+					border-left: 4px solid {{@root.pm-clr-1}}; border-radius: 4px;
+					background-color: {{@root.bg-clr-2}};
+					text-align: center; font-size: 14px;
+				">
+					<a href="{{offer.link}}" style="display: block; margin: -8px; text-decoration: none; color: inherit;">
 
-								{{!-- Offers --}}
-								<tr>
-									<td>
-										<table {{raw tableStyle}}>
+						{{!-- Title --}}
+						<div style="font-size: 16px; color: {{@root.tx-clr-2}};">
+							<strong>{{offer.title}}</strong>
+						</div>
 
-										{{#each offers as |offer|}}
-											{{!-- Offer --}}
-											<tr>
-												<td style="padding: 14px;">
-													<a href="{{offer.link}}" style="text-decoration: none; color: inherit;">
-														<table {{raw tableStyle}}>
+						{{!-- Details --}}
+						<span style="color: {{@root.tx-clr-3}};">Fuel Type:</span> <strong style="color: {{@root.tx-clr-2}};">{{offer.fuelType}}</strong>
+						<br>
+						<span style="color: {{@root.tx-clr-3}};">Availability:</span> <strong style="color: {{@root.tx-clr-2}};">{{offer.availability}}</strong>
+						<br>
+						<span style="color: {{@root.tx-clr-3}};">Lease Length:</span> <strong style="color: {{@root.tx-clr-2}};">{{offer.leaseLength}}</strong>
 
-															{{!-- Title --}}
-															<tr>
-																<td style="text-align: center; font-size: 16px;">
-																	<strong>{{offer.title}}</strong>
-																</td>
-															</tr>
-
-															{{!-- Details --}}
-															<tr>
-																<td style="text-align: center; font-size: 14px;">
-																	Fuel Type: <strong>{{offer.fuelType}}</strong><br>
-																	Availability: <strong>{{offer.availability}}</strong><br>
-																	Lease Length: <strong>{{offer.leaseLength}}</strong>
-																</td>
-															</tr>
-
-														</table>
-													</a>
-												</td>
-											</tr>
-										{{/each}}
-
-										</table>
-									</td>
-								</tr>
-								
-							</table>
-						</td>
-					</tr>
-				</table>
-			</td>
-		</tr>
-	</table>
+					</a>
+				</div>
+			{{/each}}
+			</div>
+		</div>
+	</div>
 </body>
 
 </html>
