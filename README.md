@@ -72,7 +72,7 @@ to your company.
 
 ### Mail Alerts
 
-Currently only gmail accounts are supported, if you want to recieve emails when 
+Currently only gmail accounts are supported, if you want to receive emails when 
 new offers are added:
 
 1.  Create a gmail account (or use an existing one), and set up 2FA.
@@ -83,7 +83,7 @@ new offers are added:
 
 <br>
 
-3.  Set the appropriate enviroment variables in the `.env` file.
+3.  Set the appropriate environment variables in the `.env` file.
 
 <br>
 
