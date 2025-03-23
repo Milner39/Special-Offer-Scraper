@@ -44,7 +44,7 @@ Promise<Result<nodemailer.Transporter>> => {
 // ISSUE: This is ridiculously slow for some reason
 /** Verify the auth of a Nodemailer transport */
 export const verifyTransport = 
-async (transport: nodemailer.Transporter):
+(transport: nodemailer.Transporter):
 Promise<Result<true>> => new Promise((resolve) => {
 
 	// Verify transport
