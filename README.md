@@ -67,3 +67,29 @@ to your company.
 <br>
 
 3. Start the `scraper.exe` file however you like.
+
+<br>
+
+### Mail Alerts
+
+Currently only gmail accounts are supported, if you want to recieve emails when 
+new offers are added:
+
+1.  Create a gmail account (or use an existing one), and set up 2FA.
+
+<br>
+
+2.  Create an application password for the gmail account.
+
+<br>
+
+3.  Set the appropriate enviroment variables in the `.env` file.
+
+<br>
+
+A typical alert email looks like this:
+
+<p align="center">
+    <img src="https://github.com/user-attachments/assets/bedf2a69-e77b-464d-9f46-5eae8b021688">
+</p>
+
