@@ -61,12 +61,7 @@ to your company.
 
 <br>
 
-2.  Copy `./.env` and `./static` into `./build`, these files are needed for the 
-    executable to run.
-
-<br>
-
-3. Start the `scraper.exe` file however you like.
+2. Start the `scraper.exe` file however you like.
 
 <br>
 

@@ -126,3 +126,40 @@ Promise<Result<string>> => {
 }
 
 // #endregion Read
+
+
+
+// #region Copy
+
+export const copy =
+async (srcUrl: URL, destUrl: URL):
+Promise<Result<true>> => {
+
+	// If source does not exist
+	if (!fs.existsSync(srcUrl)) return {
+		result: null,
+		success: false,
+		error: "Source does not exist"
+	}
+
+	try {
+		// Copy source to destination
+		await fs.promises.cp(srcUrl, destUrl, { recursive: true })
+
+		// Return success
+		return {
+			result: true,
+			success: true
+		}
+	}
+
+	catch (err) {
+		return {
+			result: null,
+			success: false,
+			error: err
+		}
+	}
+}
+
+// #endregion Copy
