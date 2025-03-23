@@ -48,46 +48,53 @@ const main = async () => {
 
 	/** Subroutine to run be run as a cron job */
 	async function onTick() {
-
-		console.info("Scraping offers...")
-
-		// Scrape offers from website
-		const getNewOffers = await scrape()
-		if (!getNewOffers.success) {
-			console.error(`Could not scrape offers: ${getNewOffers.error}`)
-			return
-		}
-
-		// Get differences between now and last tick
-		const diffs = compareOffersSets(storedOffers, getNewOffers.result)
-		console.info(`Offers deleted: ${diffs.deleted.size}, added: ${diffs.added.size}`)
-		
-
-		// Send alerts of offer changes
-		if (
-			(diffs.deleted.size > 0 || diffs.added.size > 0) &&
-			usingMailAlerts
-		) {
-			console.info("Sending alerts...")
+		try {
 			
-			const alert = await alertToOffers(diffs.deleted, diffs.added)
-			if (!alert.success) {
-				console.error(`Could not alert to offers: ${alert.error}`)
+			console.info("Scraping offers...")
+
+			// Scrape offers from website
+			const getNewOffers = await scrape()
+			if (!getNewOffers.success) {
+				console.error(`Could not scrape offers: ${getNewOffers.error}`)
 				return
-			} else {
-				console.info("Alerts sent")
 			}
+
+			// Get differences between now and last tick
+			const diffs = compareOffersSets(storedOffers, getNewOffers.result)
+			console.info(`Offers deleted: ${diffs.deleted.size}, added: ${diffs.added.size}`)
+			
+
+			// Send alerts of offer changes
+			if (
+				(diffs.deleted.size > 0 || diffs.added.size > 0) &&
+				usingMailAlerts
+			) {
+				console.info("Sending alerts...")
+				
+				const alert = await alertToOffers(diffs.deleted, diffs.added)
+				if (!alert.success) {
+					console.error(`Could not alert to offers: ${alert.error}`)
+					return
+				} else {
+					console.info("Alerts sent")
+				}
+			}
+
+
+			// Save offers locally
+			const saveLocalOffers = await data.save(offersDataUrl, getNewOffers.result)
+			if (!saveLocalOffers.success) {
+				console.error(`Could not save offers locally: ${saveLocalOffers.error}`)
+			}
+
+			// Update reference to stored offers
+			storedOffers = getNewOffers.result
 		}
-
-
-		// Save offers locally
-		const saveLocalOffers = await data.save(offersDataUrl, getNewOffers.result)
-		if (!saveLocalOffers.success) {
-			console.error(`Could not save offers locally: ${saveLocalOffers.error}`)
+		
+		catch (err) {
+			console.error(`Caught unhandled error: ${err}`)
+			console.error("Will retry next tick")
 		}
-
-		// Update reference to stored offers
-		storedOffers = getNewOffers.result
 	}
 
 
